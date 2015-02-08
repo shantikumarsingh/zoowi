@@ -1,0 +1,35 @@
+/* Login */
+.log_wrapper {
+	background: #6d5cae url('../../assets/images/login_bg.jpg') no-repeat center center;
+}
+.log_form {
+	margin-top:33.33333333%;
+}
+.log_form  form.thumbnail{
+	padding: 25px;
+}
+.register-text {
+	padding-top: 20px;
+}
+
+.navbar {
+	border: 0px solid #dadada;
+	border-radius: 0px;
+}
+.navbar-default {
+	background-color: #211f2a;
+}
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover {
+	color: rgba(255,255,255,0.8);
+	background-color: #383547;
+}
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>li>a:focus{
+	color: rgba(255,255,255,0.8);
+}
+.navbar-default .navbar-nav>li>a:hover {
+color: rgba(255,255,255,0.8);
+background-color: #383547;
+}
+#profile_drop>li>a {padding:0px 0px 0px 10px;}
