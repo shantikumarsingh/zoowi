@@ -29,15 +29,16 @@
 						<ul class="nav navbar-nav navbar-right" id="profile_drop">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+									<?php echo $_SESSION['zoowiuser']; ?>
 									<img src="./../../assets/images/profile.jpg" class="img-circle" alt="Shantikumar"> 
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Action</a></li>
-									<li><a href="#">Another action</a></li>
-									<li><a href="#">Something else here</a></li>
+									<li><a href="#">Profile</a></li>
+									<!--<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>-->
 									<li class="divider"></li>
-									<li><a href="#">Separated link</a></li>
+									<li><a href="../../LoginHandler.php?action=logout"><i class="fa fa-sign-out"></i>Logout</a></li>
 								</ul>
 							</li>
 						</ul>

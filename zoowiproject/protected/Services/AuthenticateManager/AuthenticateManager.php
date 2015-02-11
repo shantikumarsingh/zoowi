@@ -16,7 +16,6 @@ class AuthenticateManager{
 		if($userName == 'iadmin@gmail.com' && $password == 'demo'  ) {
 			$this->authenticate = true;
 			self::authSetSession($userName);
-			error_log('Setting ');
 		} else {
 			$_SESSION['zoowiuser'] = 'Authentication Failed';
 		}
@@ -25,13 +24,13 @@ class AuthenticateManager{
 	public function authSetSession ($userName) {
 		$_SESSION['zoowiuser'] = 'Sunil Kumar';
 		$_SESSION['zoowiemail'] = $userName;
-		header("Location: /zoowiproject/protected/application/");
+		header("Location: /protected/application/");
 		exit(0);   
 	}
 	public function authLogout() {
 		if(isset($_SESSION['zoowiuser']))
 			session_destroy();
-		header("Location: /zoowiproject/");
+		header("Location: /");
 		exit(0);   
 	}
 	

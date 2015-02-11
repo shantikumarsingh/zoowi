@@ -22,8 +22,6 @@
 	<body>
 		<div><?php include('./header/header.php'); ?> </div>
 
-		<div>Welcome! <?php echo $_SESSION['zoowiuser']; ?> </div>
-		<div><a href="../../LoginHandler.php?action=logout">Logout! </a> </div>
 		<!-- body -->
 		
 		<div><?php include('./body/body.php'); ?> </div>
