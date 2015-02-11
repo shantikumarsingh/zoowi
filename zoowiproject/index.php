@@ -29,11 +29,11 @@
 							<?php if(isset($_SESSION['zoowiuser'])) { ?>
 							<div class="alert alert-danger"> Authentication Failed !</div>
 							<?php }?>
-							<div class="form-group has-error">
+							<div class="form-group">
 								<label for="exampleInputEmail1">Email</label>
 								<input type="email" name="username" class="form-control" id="exampleInputEmail1" placeholder="e.g. abcd@gmail.com" required>
 							</div>
-							<div class="form-group has-error">
+							<div class="form-group">
 								<label for="exampleInputPassword1">Password</label>
 								<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
 							</div>
