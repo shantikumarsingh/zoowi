@@ -29,11 +29,11 @@
 							<?php if(isset($_SESSION['zoowiuser'])) { ?>
 							<div class="alert alert-danger"> Authentication Failed !</div>
 							<?php }?>
-							<div class="form-group">
+							<div class="form-group has-error">
 								<label for="exampleInputEmail1">Email</label>
 								<input type="email" name="username" class="form-control" id="exampleInputEmail1" placeholder="e.g. abcd@gmail.com" required>
 							</div>
-							<div class="form-group">
+							<div class="form-group has-error">
 								<label for="exampleInputPassword1">Password</label>
 								<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
 							</div>
@@ -44,7 +44,7 @@
 								<a href="javascript:void(0);" class="pull-right">Forgot Password&#63;</a>
 							</div>
 							<button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
-							<p class="register-text">New to ZOOWIMAMA&#63; <a href="./registration.php">Sign Up Now</a></p>
+							<p class="register-text">New to ZOOWIMAMA&#63; <a href="./registration">Sign Up Now</a></p>
 						</form>
 					</div>
 				</div>
@@ -64,6 +64,5 @@
 		</footer>
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-		<script src="assets/thirdparty/js/grid.js"></script>
 	</body>
 </html>

@@ -6,7 +6,6 @@
 		'Countries' => __DIR__.'/protected/Services/Countries/Countries.php',
 		'UserBusinessServices' => __DIR__.'/protected/Services/business/user/UserBusinessServices.php',
 		'UserDataServices' => __DIR__.'/protected/Services/data/user/UserDataServices.php',
-	
 	);	
 	
 	
