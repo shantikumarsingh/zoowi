@@ -41,6 +41,12 @@ require_once(__DIR__.'/ClassMap.php');
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="inputEmail" class="col-sm-3 control-label">Email</label>
+								<div class="col-sm-9">
+									<input type="email" class="form-control" id="inputEmail" placeholder="e.g. abcd@gmail.com" required>
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="InputPassword" class="col-sm-3 control-label">Password</label>
 								<div class="col-sm-9">
 									<input type="password" class="form-control" id="InputPassword" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
