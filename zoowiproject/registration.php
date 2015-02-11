@@ -27,7 +27,7 @@ require_once(__DIR__.'/ClassMap.php');
 								<a class="btn btn-link pull-right" href="./" role="button">Sign In</a>
 							</div>
 						</div>
-						<form class="form-horizontal">
+						<form class="form-horizontal" action="./RegistrationHandler.php" method="post">
 							<div class="form-group">
 								<label for="inputFirstName" class="col-sm-3 control-label">First Name</label>
 								<div class="col-sm-9">
