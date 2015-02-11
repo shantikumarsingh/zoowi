@@ -1,6 +1,3 @@
-<?php 
-require_once(__DIR__.'/ClassMap.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -31,31 +28,31 @@ require_once(__DIR__.'/ClassMap.php');
 							<div class="form-group">
 								<label for="inputFirstName" class="col-sm-3 control-label">First Name</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="inputFirstName" placeholder="e.g. Rahul" required>
+									<input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="e.g. Rahul" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputLastName" class="col-sm-3 control-label">Last Name</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="inputFirstName" placeholder="e.g. Ankarboina" required>
+									<input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="e.g. Ankarboina" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail" class="col-sm-3 control-label">Email</label>
 								<div class="col-sm-9">
-									<input type="email" class="form-control" id="inputEmail" placeholder="e.g. abcd@gmail.com" required>
+									<input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="e.g. abcd@gmail.com" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="InputPassword" class="col-sm-3 control-label">Password</label>
 								<div class="col-sm-9">
-									<input type="password" class="form-control" id="InputPassword" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
+									<input type="password" class="form-control" id="InputPassword" name="InputPassword" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="InputConfirmPassword" class="col-sm-3 control-label">Confirm Password</label>
 								<div class="col-sm-9">
-									<input type="password" class="form-control" id="InputConfirmPassword" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
+									<input type="password" class="form-control" id="InputConfirmPassword" name="InputConfirmPassword"  placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
 								</div>
 							</div>
 							<div class="form-group">
@@ -70,7 +67,7 @@ require_once(__DIR__.'/ClassMap.php');
 							<div class="form-group">
 								<label for="InputPhoneNumber" class="col-sm-3 control-label">Phone Number <p><small class="text-muted">(optional)</small></p></label>
 								<div class="col-sm-9">
-									<input type="number" class="form-control" id="InputPhoneNumber" placeholder="" required>
+									<input type="number" class="form-control" id="InputPhoneNumber" name="InputPhoneNumber"  placeholder="" required>
 								</div>
 							</div>
 							<div class="form-group">
