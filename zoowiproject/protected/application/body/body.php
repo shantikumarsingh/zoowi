@@ -9,7 +9,7 @@
 								<img class="media-object img-circle" src="./../../assets/images/profile.jpg" alt="...">
 							</a>
 							<h4 class="media-heading">
-								Jeff Curtis
+								Shantikumar
 								<small class="center-block">28 mins ago</small>
 							</h4>
 						</div>
@@ -27,7 +27,7 @@
 								<img class="media-object img-circle" src="./../../assets/images/profile.jpg" alt="...">
 							</a>
 							<h4 class="media-heading">
-								Jeff Curtis
+								Shantikumar
 								<small class="center-block">28 mins ago</small>
 							</h4>
 						</div>
@@ -43,7 +43,7 @@
 								<img class="media-object img-circle" src="./../../assets/images/profile.jpg" alt="...">
 							</a>
 							<h4 class="media-heading">
-								Jeff Curtis
+								Shantikumar
 								<small class="center-block">28 mins ago</small>
 							</h4>
 						</div>
@@ -59,7 +59,7 @@
 								<img class="media-object img-circle" src="./../../assets/images/profile.jpg" alt="...">
 							</a>
 							<h4 class="media-heading">
-								Jeff Curtis
+								Shantikumar
 								<small class="center-block">28 mins ago</small>
 							</h4>
 						</div>
@@ -75,7 +75,7 @@
 								<img class="media-object img-circle" src="./../../assets/images/profile.jpg" alt="...">
 							</a>
 							<h4 class="media-heading">
-								Jeff Curtis
+								Shantikumar
 								<small class="center-block">28 mins ago</small>
 							</h4>
 						</div>
@@ -91,7 +91,7 @@
 								<img class="media-object img-circle" src="./../../assets/images/profile.jpg" alt="...">
 							</a>
 							<h4 class="media-heading">
-								Jeff Curtis
+								Shantikumar
 								<small class="center-block">28 mins ago</small>
 							</h4>
 						</div>
@@ -107,7 +107,7 @@
 								<img class="media-object img-circle" src="./../../assets/images/profile.jpg" alt="...">
 							</a>
 							<h4 class="media-heading">
-								Jeff Curtis
+								Shantikumar
 								<small class="center-block">28 mins ago</small>
 							</h4>
 						</div>
@@ -123,7 +123,7 @@
 								<img class="media-object img-circle" src="./../../assets/images/profile.jpg" alt="...">
 							</a>
 							<h4 class="media-heading">
-								Jeff Curtis
+								Shantikumar
 								<small class="center-block">28 mins ago</small>
 							</h4>
 						</div>
