@@ -3,14 +3,30 @@
 	background: #6d5cae url('../../assets/images/login_bg.jpg') no-repeat center center;
 }
 .log_form {
-	margin-top:33.33333333%;
+	margin:0 auto;
+	width: 445px !important;
 }
-.log_form  form.thumbnail{
+.reg_form  .thumbnail {
+	padding: 0px 30px 0px;
+}
+.reg_form  .form-header {
+	padding-top:10px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #dadada;
+}
+.reg_form  .form-header  .lead{
+	margin-bottom: 10px;
+}
+.log_form  .thumbnail{
 	padding: 25px;
 }
 .register-text {
 	padding-top: 20px;
 }
+.text-white {
+	color: #FFFFFF !important;
+}
+
 
 .navbar {
 	border: 0px solid #dadada;
