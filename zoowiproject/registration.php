@@ -79,7 +79,6 @@ require_once(__DIR__.'/ClassMap.php');
 									<button type="submit" class="btn btn-link">Cancel</button>
 								</div>
 							</div>
-							<p class="col-sm-offset-3">By clicking 'Create Account' you agree to the <a href="javascript:void(0);">Terms of Use</a> and <a href="javascript:void(0);">Privacy Policy</a></p>
 						</form>
 					</div>
 				</div>
