@@ -44,7 +44,7 @@
 								<a href="javascript:void(0);" class="pull-right">Forgot Password&#63;</a>
 							</div>
 							<button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
-							<p class="register-text">New to ZOOWIMAMA&#63; <a href="./registration">Sign Up Now</a></p>
+							<p class="register-text">New to ZOOWIMAMA&#63; <a href="./registration.php">Sign Up Now</a></p>
 						</form>
 					</div>
 				</div>
