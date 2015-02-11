@@ -39,6 +39,7 @@
 .navbar-default .navbar-nav>.active>a:hover {
 	color: rgba(255,255,255,0.8);
 	background-color: #383547;
+	border-left: 4px solid #05D09A;
 }
 .navbar-default .navbar-nav>.active>a:focus,
 .navbar-default .navbar-nav>li>a:focus{
@@ -62,6 +63,7 @@ footer {
 
 #demo {
 	position: relative;
+	left: 15px;
 }
 img {
 	width: 100%;
@@ -72,8 +74,19 @@ img {
 	position: absolute;
 	padding: 10px;
 }
+.white-panel div.media-heading a {
+	width:32px;
+	height:40px;
+	display:inline-block;
+	margin-right:10px;
+}
+.white-panel h4.media-heading {
+	display:inline-block;
+	vertical-align:top;
+}
+
 .white-panel h1 {
-font-size: 1em;
+	font-size: 1em;
 }
 .white-panel h1 a {
 color: #A92733;

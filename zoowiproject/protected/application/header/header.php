@@ -11,21 +11,6 @@
 						<a class="navbar-brand" href="#"><i class="fa fa-bars"></i> ZOOWIMAMA</a>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#"><i class="fa fa-tasks"></i> Feeds </a></li>
-							<li><a href="#"><i class="fa fa-bell-o"></i> Notifications</a></li>
-							<li><a href="#"><i class="fa fa-users"></i> List</a></li>
-						</ul>
-						<form class="form-inline navbar-form navbar-left">
-						  <div class="form-group">
-							<div class="input-group">
-							  <input type="text" class="form-control" id="search" placeholder="Search">
-							  <div class="input-group-addon">
-								<i class="fa fa-search"></i>
-							  </div>
-							</div>
-						  </div>
-						</form>
 						<ul class="nav navbar-nav navbar-right" id="profile_drop">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -45,6 +30,21 @@
 									<li><a href="../../LoginHandler.php?action=logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 								</ul>
 							</li>
+						</ul>
+						<form class="form-inline navbar-form navbar-right">
+						  <div class="form-group">
+							<div class="input-group">
+							  <input type="text" class="form-control" id="search" placeholder="Search">
+							  <div class="input-group-addon">
+								<i class="fa fa-search"></i>
+							  </div>
+							</div>
+						  </div>
+						</form>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="active"><a href="#"><i class="fa fa-tasks"></i> Feeds </a></li>
+							<li><a href="#"><i class="fa fa-bell-o"></i> Notifications</a></li>
+							<li><a href="#"><i class="fa fa-users"></i> List</a></li>
 						</ul>
 					</div>
 				</div>

@@ -1,4 +1,0 @@
-
-
-Copyrights Section Goes here 
-
