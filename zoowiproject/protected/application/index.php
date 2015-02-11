@@ -15,8 +15,8 @@
 	<body>
 		<div><?php include('./header/header.php'); ?> </div>
 		<div>Welcome! <?php echo $_SESSION['zoowiuser']; ?> </div>
-		<div><a href="../../LoginHandler.php?action=logout">Logout! </a> </div>
-		<?php 	echo " Authorised Dynamic body Contents here " ; ?>
+		<div><a href="../../LoginHandler.php?action=logout">Logout! </a></div>
+		<?php echo " Authorised Dynamic body Contents here " ; ?>
 		<div><?php include('./footer/footer.php'); ?> </div>
 	</body>
 </html>

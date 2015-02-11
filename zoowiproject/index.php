@@ -64,5 +64,6 @@
 		</footer>
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="assets/thirdparty/js/grid.js"></script>
 	</body>
 </html>
