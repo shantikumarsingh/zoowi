@@ -20,15 +20,14 @@
 		<link rel="stylesheet" href="./../../assets/css/custom.css">
 	</head>
 	<body>
-		<div><?php include('./header/header.php'); ?> </div>
+		<?php include('./header/header.php'); ?>
 
 		<!-- body -->
-		
-		<div><?php include('./body/body.php'); ?> </div>
+		<?php include('./body/body.php'); ?>
 
-		<!-- body -->
-		
-		<div><?php include('./footer/footer.php'); ?> </div>
+		<!-- footer -->
+		<?php include('./footer/footer.php'); ?>
+
 		<script src="./../../assets/js/jquery.min.js"></script>
 		<script src="./../../assets/js/bootstrap.min.js"></script>
 		<script src="./../../assets/thirdparty/grids/grid.js"></script>
