@@ -1,3 +1,6 @@
+<?php 
+require_once(__DIR__.'/ClassMap.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -73,7 +76,8 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-9">
 									<button type="submit" class="btn btn-primary">Create Account</button>
-									<button type="submit" class="btn btn-link">Cancel</button>
+									<!-- <button type="submit" class="btn btn-link">Cancel</button> -->
+									<a class="btn btn-link" href="./" role="button">Cancel</a>
 								</div>
 							</div>
 						</form>

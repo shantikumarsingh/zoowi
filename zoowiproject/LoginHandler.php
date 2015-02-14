@@ -15,10 +15,7 @@
 			$isAuthenticate = false;
 			
 			$isAuthenticate = $this->auManager->doAuthenticate($userName, $password);
-			//exit;
 			if($isAuthenticate === false){
-			var_dump($isAuthenticate);
-				echo "Authentication Failed ";
 				$this->auManager->authLogout();
 			}
 		}
