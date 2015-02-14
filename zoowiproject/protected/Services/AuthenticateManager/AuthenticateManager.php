@@ -5,32 +5,48 @@
 
 class AuthenticateManager{
 
-	private $authenticate; 
+	private $authenticate;
+	private $userBusinessServices; 
 	function __construct() {
-	
+		$this->userBusinessServices = new UserBusinessServices;
 	}
 	
 	public function doAuthenticate($userName, $password){
 		// Currently Authenticated by Default
 		$this->authenticate = false;
-		if($userName == 'iadmin@gmail.com' && $password == 'demo'  ) {
-			$this->authenticate = true;
-			self::authSetSession($userName);
+		$userObject = $this->userBusinessServices->validateUserExists($userName, $password);
+		if($userObject){
+			error_log(' inside ') ;
+			if($userName == $userObject->username && md5($password) == $userObject->password_hash) {
+			
+			error_log(' Validated ') ;
+				$this->authenticate = true; 
+				$userSetName = ucfirst($userObject->firstname . ' ' . $userObject->lastname );
+				self::authSetSession($userSetName, $userObject->username);
+			} else 
+				$this->authenticate = false; 
+			
 		} else {
-			$_SESSION['zoowiuser'] = 'Authentication Failed';
+				self::authSetSession('Invalid User', 'Invalid Email');
 		}
 		return $this->authenticate;
 	}
-	public function authSetSession ($userName) {
-		$_SESSION['zoowiuser'] = 'Sunil Kumar';
-		$_SESSION['zoowiemail'] = $userName;
-		header("Location: /protected/application/");
+	/**
+	 * 
+	 * Setting up the Session Variables
+	 * @param unknown_type $userName
+	 */
+	public function authSetSession ($userSetName ,  $email) {
+
+		$_SESSION['zoowiuser'] = $userSetName;
+		$_SESSION['zoowiemail'] = $email;
+		header("Location: /zoowiproject/protected/application/");
 		exit(0);   
 	}
 	public function authLogout() {
 		if(isset($_SESSION['zoowiuser']))
 			session_destroy();
-		header("Location: /");
+		header("Location: /zoowiproject/");
 		exit(0);   
 	}
 	

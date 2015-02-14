@@ -1,12 +1,3 @@
-<?php 
-	session_start();
-	if(!isset($_SESSION['zoowiuser']) && !isset ($_SESSION['zoowiemail'])){
-		//header("Location: /zoowiproject/protected/application/");
-		//exit(0);   
-	}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>

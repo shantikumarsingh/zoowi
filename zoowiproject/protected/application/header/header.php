@@ -1,3 +1,13 @@
+<?php 
+	session_start();
+	if($_SESSION['zoowiuser'] == 'Invalid User' && $_SESSION['zoowiemail']== 'Invalid Email'){
+		session_destroy();
+		header("Location: /zoowiproject/");
+		exit(0);   
+	}
+
+?>
+
 		<header>
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
