@@ -1,56 +1,68 @@
-<?php
-	$this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
-	$this->breadcrumbs=array(
-		UserModule::t("Login"),
-	);
-?>
+<section class="log_wrapper">
+	<div class="container">
+		<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login"); ?>
 
-<h1><?php echo UserModule::t("Login"); ?></h1>
+		
 
-<?php if(Yii::app()->user->hasFlash('loginMessage')): ?>
+		<?php if(Yii::app()->user->hasFlash('loginMessage')): ?>
 
-<div class="success">
-	<?php echo Yii::app()->user->getFlash('loginMessage'); ?>
-</div>
+		<div class="success">
+			<?php echo Yii::app()->user->getFlash('loginMessage'); ?>
+		</div>
 
-<?php endif; ?>
+		<?php endif; ?>
+		<div class="log_form">
+			<h2 class="text-center">ZOOWIMAMA <small>beta</small></h2>
+			<div class="thumbnail">
+				<?php 
+					$htmlOptions=array ('id'=>'signin_form');
+					echo CHtml::beginForm($htmlOptions);
+				?>
+					
+					<?php 
+						$htmlOptions=array ('class'=>'alert alert-danger');
+						echo CHtml::errorSummary($model,'','',$htmlOptions);
+					?>
+					<div class="form-group">
+						<?php 
+							$htmlOptions=array ('for'=>'UserLogin_username');
+							echo CHtml::activeLabelEx($model,'username',$htmlOptions);
+						?>
+						<?php 
+							$htmlOptions=array ("class"=>"form-control","placeholder"=>"e.g. abcd@gmail.com","required"=>"required");
+							echo CHtml::activeTextField($model,'username',$htmlOptions)
+						?>
+					</div>
+					<div class="form-group">
+						<?php 
+							$htmlOptions=array ('for'=>'UserLogin_password');
+							echo CHtml::activeLabelEx($model,'password',$htmlOptions);
+						?>
+						<?php 
+							$htmlOptions=array ("class"=>"form-control","placeholder"=>"......","required"=>"required");
+							echo CHtml::activePasswordField($model,'password',$htmlOptions);
+						?>
+					</div>
+					<div class="checkbox">
+						<label>
+							<?php echo CHtml::activeCheckBox($model,'rememberMe'); ?>
+							<?php echo CHtml::activeLabelEx($model,'rememberMe'); ?>
+						</label>
+						<?php 
+							$htmlOptions=array ('class'=>'pull-right');
+							echo CHtml::link(UserModule::t("Forgot Password&#63;"),Yii::app()->getModule('user')->recoveryUrl,$htmlOptions);
+						?>
+					</div>
+					
+					<?php 
+						$htmlOptions=array ('class'=>'btn btn-primary btn-lg btn-block');
+						echo CHtml::submitButton(UserModule::t("Sign In"),$htmlOptions);
+					?>
+					<p class="register-text">New to ZOOWIMAMA&#63; <?php echo CHtml::link(UserModule::t("Sign Up Now"),Yii::app()->getModule('user')->registrationUrl); ?></p>
 
-<p><?php echo UserModule::t("Please fill out the following form with your login credentials:"); ?></p>
-
-<div class="form">
-<?php echo CHtml::beginForm(); ?>
-
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
-	
-	<?php echo CHtml::errorSummary($model); ?>
-	
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'username'); ?>
-		<?php echo CHtml::activeTextField($model,'username') ?>
-	</div>
-	
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'password'); ?>
-		<?php echo CHtml::activePasswordField($model,'password') ?>
-	</div>
-	
-	<div class="row">
-		<p class="hint">
-		<?php echo CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl); ?> | <?php echo CHtml::link(UserModule::t("Lost Password?"),Yii::app()->getModule('user')->recoveryUrl); ?>
-		</p>
-	</div>
-	
-	<div class="row rememberMe">
-		<?php echo CHtml::activeCheckBox($model,'rememberMe'); ?>
-		<?php echo CHtml::activeLabelEx($model,'rememberMe'); ?>
-	</div>
-
-	<div class="row submit">
-		<?php echo CHtml::submitButton(UserModule::t("Login")); ?>
-	</div>
-	
-<?php echo CHtml::endForm(); ?>
-</div><!-- form -->
+				<?php echo CHtml::endForm(); ?>
+			</div>
+		</div>
 
 
 <?php
@@ -77,3 +89,5 @@ $form = new CForm(array(
     ),
 ), $model);
 ?>
+	</div>
+</section>
