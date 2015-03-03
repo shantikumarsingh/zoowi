@@ -153,15 +153,9 @@
 						$timelineInnerData .='</a><br />';
 					}
 			}			
-echo $timelineInnerData ;	
+		echo $timelineInnerData ;	
 		} catch (Exception $e){
 			echo $e->getMessage();
 		}
-		
-		/*
-		$adapter2 = $hybridauth->authenticate( "twitter" );
-		$user_profile2 = $adapter2->getUserProfile();
-		echo "<br>". $user_profile2->displayName; 
-		echo "<br />" . $user_profile2->profileURL; 
-		*/
+// 		
 ?>		

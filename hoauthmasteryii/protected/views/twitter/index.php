@@ -94,6 +94,18 @@
 		return $timeline;
 	}
 	
+	function formatTimeline($user_time_line){
+		$formatTimelineHtml = '' ;
+		foreach ($user_time_line as $key=> $timeLine) {
+			$formatTimelineHtml  .='<div>';
+			$formatTimelineHtml  .=" <span> display text "  .  $timeLine->text . "</span> " ; 
+			$formatTimelineHtml  .=" <span> Tweet Count "  .  $timeLine->retweet_count . "</span>" ; 
+			$formatTimelineHtml  .= " <span> Favourite Count "  .  $timeLine->favorite_count. "</span>" ;
+			$formatTimelineHtml  .='</div> <br/>'; 
+		}
+		return $formatTimelineHtml ;
+	}
+	
 	$config =  './protected/config/hoauth.php';
 	require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
 	$hybridauth = new Hybrid_Auth( $config );
@@ -128,9 +140,17 @@
 			$time_line = displayUserTimeLine($user_time_line );
 			
 */
-			$user_time_line = $twitter->getUserActivity( "timeline" );
-			$time_line = displayUserTimeLine($user_time_line );
-			echo $time_line;
+			echo '<pre>';
+			//$user_time_line = $twitter->getUserActivity( "timeline" );
+//			$user_time_line = $twitter->api()->api('/statuses/user_timeline.json'); //  returns data 
+			$user_time_line = $twitter->api()->api('/statuses/user_timeline.json');
+			$timelineHtml = formatTimeline($user_time_line);
+			echo $timelineHtml  ;
+			
+			//print_r($user_time_line); 
+			
+			//$time_line = displayUserTimeLine($user_time_line );
+			//echo $time_line;
 ?>			
 	<hr>
 	<h3> Activity </h3>	

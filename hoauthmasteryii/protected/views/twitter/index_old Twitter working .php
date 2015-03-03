@@ -2,7 +2,7 @@
 
 /**
  * 
- * This file list the facebook pages
+ * This file list the twitter feeds
  * @param unknown_type $dt
  */
 	
@@ -48,8 +48,6 @@
 		return $output;
 	}
 	
-	
-
 		// format message
 	function format_string( $string )
 	{
@@ -67,12 +65,19 @@
 		return $string;
 	}
 
-	/**
-	 * 
-	 * Facebook Functions 
-	 * @param $user_activity
-	 */
-	
+
+	function getUserContacts($userContacts){
+		$contactHtml ='';
+		foreach ($userContacts as $item) {
+			if( $item->photoURL )
+				$contactHtml  .='<a href="'.$item->profileURL.'"><img src="'.$item->photoURL.'" border="0" width="48" height="48"></a>';
+			else 
+				$contactHtml .='<a href="'.$item->profileURL.'"><img src="./images/profileuser.png" border="0" width="48" height="48"></a>';
+			$contactHtml .= '<span><a href="'.$item->profileURL.'"<b>'.$item->displayName.'</b></a> </span>';	
+		}
+		return $contactHtml. "<br />" ;
+	}
+
 	function displayUserTimeLine($user_activity){
 			
 		$timeline = '<div>' ;	
@@ -88,64 +93,48 @@
 		$timeline .= '</div> ' ;	
 		return $timeline;
 	}
+	
+	$config =  './protected/config/hoauth.php';
+	require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
+	$hybridauth = new Hybrid_Auth( $config );
+	
+	$twitter = $hybridauth->authenticate( "Twitter" );
 
-	function displayUserActivity($user_activity){
+	// return TRUE or False <= generally will be used to check if the user is connected to twitter before getting user profile, posting stuffs, etc..
+	$is_user_logged_in = $twitter->isUserConnected();
+	$user_profile = $twitter->getUserProfile();
+	$identifier = $user_profile->identifier ;
+
+
+?>
 		
-	}
-	
-	
-		try {
+	<img src = "<?php echo $user_profile->photoURL; ?>" width= "32" height="32"></img>		
+	<h3><?php echo  $user_profile->displayName; ?></h3>
+	<hr>
 
-			//echo CHtml::button(' POST ', array('submit' => array('fb/postPage'))); 
-			echo CHtml::link(' POST ',array('fb/postPage'),array('class'=>'link_on_fb'));
-			echo '<br />' ; 
-			echo '<br />' ; 
-			echo CHtml::link(' Update Status ',array('fb/updateStatusPage'),array('class'=>'link_on_fb')); 
-			echo '<br />' ; 
-			echo '<br />' ; 
-			
-			
-			$config =  './protected/config/hoauth.php';
-			require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
-			$hybridauth = new Hybrid_Auth( $config );
+	<h3>User Contacts </h3>
+<?php 
+	echo $userContacts = getUserContacts($twitter->getUserContacts());
 
-			$fbAdapter = $hybridauth->authenticate( "facebook" );
-			$fbUserProfile = $fbAdapter->getUserProfile();
-			// UserId for Facebook account
-			$fbIdentifier = $fbUserProfile->identifier; 
-	?>
-	
-<img src = "<?php echo $fbUserProfile->photoURL;?>" width= "32" height="32"></img>	
-	<h3><?php echo  $fbUserProfile->displayName; ?></h3>
-	<?php 
-			//get Friends List
-			//$response = $fbAdapter->api()->api('/me/friends?fields=link,name');
-// OR			
-			//$personFriendsList = $fbAdapter->api()->api('/'.$fbIdentifier.'/friends?fields=link,name');
-			//print_r($personFriendsList ); 
-			//exit;
-			
-	// get the timeline 		
+?>
+
+	<hr>
+<?php 
+/** 
+ * get Timelines
+ */
+/*
 			$user_time_line = $fbAdapter->getUserActivity( "timeline" );
 			$time_line = displayUserTimeLine($user_time_line );
+			
+*/
+			$user_time_line = $twitter->getUserActivity( "timeline" );
+			$time_line = displayUserTimeLine($user_time_line );
 			echo $time_line;
-		} catch (Exception $e){
-			echo $e->getMessage();
-		}
-			//exit;
-		
-//		echo $fbUserProfile ->displayName; 
-//		echo "<br />" . $fbUserProfile ->profileURL; 
-//		echo "<pre>" ;
-		
-		//print_r( $fbAdapter->config['keys']['id'] );
-		//print_r( $fbAdapter );
-		//print_r( $fbAdapter->getAccessToken() );
+?>			
+	<hr>
+	<h3> Activity </h3>	
+<?php 
+	$user_activity = $twitter->getUserActivity( "me" ); 
 
-		/*
-		$adapter2 = $hybridauth->authenticate( "twitter" );
-		$user_profile2 = $adapter2->getUserProfile();
-		echo "<br>". $user_profile2->displayName; 
-		echo "<br />" . $user_profile2->profileURL; 
-		*/
-?>		
+?>	
