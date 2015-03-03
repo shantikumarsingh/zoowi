@@ -136,6 +136,8 @@
 	<h3><?php echo  $fbUserProfile->displayName; ?></h3>
 	<?php 
 
+			
+		
 			$timelineFeeds = $fbAdapter->api()->api('/me/posts');
 			
 			$timelineInnerData=''; 
