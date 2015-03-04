@@ -57,12 +57,12 @@ return
 			),
 			"Instagram" =>   array ( 
 				"enabled"   => true,
-				"keys"   => array ( "id" => "*****************", "secret" => "*********************************" )
+				"keys"   => array ( "id" => "0d703d08296f4a31bc40a68a4ee60bed", "secret" => "f92c00828052406697639c7a236f1d79" )
 			), 
 			"Foursquare" => array (
 				"enabled" => true,
-				"keys"    => array ( "id" => "STJVHA0GPK0I3G5JUH05V1EHLD11F0IQX3FG5MEM0YFQEHKG", 
-				"secret" => "JNR4HYIECZ3THEZOSGO1GS3TNZZYVXZMGY5EDRPQAHKMN4WB" ) 
+				"keys"    => array ( "id" => "SQALUPBSPPVOYTQSGTUX3J3133FY5TOQN5NLHL2IQ35BUG23", 
+				"secret" => "BHGOHMS4MUYEQVWEY2MRDX0YY3L0BLBRMPXBGLD4MKOAL2XS" ) 
 			),
 
 /*
