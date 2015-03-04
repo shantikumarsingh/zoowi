@@ -136,9 +136,9 @@
 	<h3><?php echo  $fbUserProfile->displayName; ?></h3>
 	<?php 
 
-			$trends = $fbAdapter->api()->api('/trends?country=US&fields=headline,categories,photo_icon');
-			print_r($trends);
-			exit;
+			//$trends = $fbAdapter->api()->api('/trends?country=US&fields=headline,categories,photo_icon');
+			//print_r($trends);
+			//exit;
 			
 		
 			$timelineFeeds = $fbAdapter->api()->api('/me/posts');
