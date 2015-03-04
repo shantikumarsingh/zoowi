@@ -34,8 +34,8 @@ return
 			"Google" => array ( 
 				"enabled" => true,
 				"keys"    => array ( 
-					"id" => "97768727470-qnr960vg527r73gp52910igh1q03mffi.apps.googleusercontent.com", 
-					"secret" => "0a30e51383ffc0f619d9054c31aae0800e06abf4" 
+					"id" => "97768727470-rjrtasa09l1coo9oli5r7ea0qv98ter1.apps.googleusercontent.com", 
+					"secret" => "a-u2kHpMe9bGdcNkkhdy9q1I" 
 							)
 			),
 
@@ -63,6 +63,11 @@ return
 				"enabled" => true,
 				"keys"    => array ( "id" => "SQALUPBSPPVOYTQSGTUX3J3133FY5TOQN5NLHL2IQ35BUG23", 
 				"secret" => "BHGOHMS4MUYEQVWEY2MRDX0YY3L0BLBRMPXBGLD4MKOAL2XS" ) 
+			),
+			"Tumblr" => array (
+				"enabled" => true,
+				"keys"    => array ( "key" => "a40mfQYXnQMxPTVLQhtlS254xswVOKDDKOHXwGolAz6X2b7XJX", 
+				"secret" => "YSqxxuny9Kjy8BntmF4UbTn6FsVJHfkGGovWaudJSQCfUrhVNi" ) 
 			),
 
 /*
