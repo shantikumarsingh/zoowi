@@ -74,40 +74,23 @@
 	 */
 	
 	function displayUserTimeLine($user_activity){
-		echo "<pre>";
-		print_r($user_activity);
-		exit;
+			
 		$timeline = '<div>' ;	
 		foreach ($user_activity as $item) {
-			$timeline .= '<a href="'.$item->user->profileURL.'">';
 			if( $item->user->photoURL )
-				$timeline .='<img src="'.$item->user->photoURL.'" border="0" width="48" height="48">';
+				$timeline .='<a href="'.$item->user->profileURL.'"><img src="'.$item->user->photoURL.'" border="0" width="48" height="48"></a>';
 			else 
-				$timeline .='<img src="./images/profileuser.png" border="0" width="48" height="48">';
-			$timeline .= '<span><a href="'.$item->user->profileURL.'"><b>'.$item->user->displayName.'</b></a> </span>';	
+				$timeline .='<a href="'.$item->user->profileURL.'"><img src="./images/profileuser.png" border="0" width="48" height="48"></a>';
+			$timeline .= '<span><a href="'.$item->user->profileURL.'"<b>'.$item->user->displayName.'</b></a> </span>';	
 			$timeline .= '<span>'.format_string( $item->text ).'</span>';	
-			$timeline .= '<small>'.timestamp_to_relative_time( $item->date ).'</small>';	
-			$timeline .= '</a><br /> ';	
-			
+			$timeline .= '<small>'.timestamp_to_relative_time( $item->date ).'</small> <br />';	
 		}
-		$timeline .= '</div>' ;	
+		$timeline .= '</div> ' ;	
 		return $timeline;
 	}
-	
-	function getPostId($id){
-		$ids = explode("_" , $id) ;
-		return $ids[1];
-	}
 
-	function formatUserComments($comments, $link){
+	function displayUserActivity($user_activity){
 		
-		$feedData = '<a href="'.$link.'"> <div>';
-		foreach ($comments as $comment){
-			$feedData .= '<span> '.$comment['message'].'</span>';
-			//$feedData .= '<span> Count '.$comment['like_count'].'</span><br />';
-		} 
-		$feedData .= '</div> </a>';
-		return $feedData;
 	}
 	
 	
@@ -120,7 +103,8 @@
 			echo CHtml::link(' Update Status ',array('fb/updateStatusPage'),array('class'=>'link_on_fb')); 
 			echo '<br />' ; 
 			echo '<br />' ; 
-					
+			
+			
 			$config =  './protected/config/hoauth.php';
 			require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
 			$hybridauth = new Hybrid_Auth( $config );
@@ -128,39 +112,40 @@
 			$fbAdapter = $hybridauth->authenticate( "facebook" );
 			$fbUserProfile = $fbAdapter->getUserProfile();
 			// UserId for Facebook account
-			$fbIdentifier = $fbUserProfile->identifier;
-			
+			$fbIdentifier = $fbUserProfile->identifier; 
 	?>
 	
 <img src = "<?php echo $fbUserProfile->photoURL;?>" width= "32" height="32"></img>	
 	<h3><?php echo  $fbUserProfile->displayName; ?></h3>
 	<?php 
-
-			$trends = $fbAdapter->api()->api('/trends?country=US&fields=headline,categories,photo_icon');
-			print_r($trends);
-			exit;
+			//get Friends List
+			//$response = $fbAdapter->api()->api('/me/friends?fields=link,name');
+// OR			
+			//$personFriendsList = $fbAdapter->api()->api('/'.$fbIdentifier.'/friends?fields=link,name');
+			//print_r($personFriendsList ); 
+			//exit;
 			
-		
-			$timelineFeeds = $fbAdapter->api()->api('/me/posts');
-			
-			$timelineInnerData=''; 
-			foreach ($timelineFeeds as $key => $feeds){
-				
-				if($key != 'paging')
-					foreach ($feeds as $iKey => $feed){
-					
-						 $timelineInnerData .= '<a href="'.$feed['actions'][0]['link'].'" target="__blank"><span>'.$feed['message'].'</span>' ;
-						if(isset($feed['comments']['data'])){
-							foreach($feed['comments']['data'] as $comment){
-								$timelineInnerData  .= $comment['message'] . '  Likes  '. $comment['like_count'] . "<br />" ;
-							}		
-						}
-						$timelineInnerData .='</a><br />';
-					}
-			}			
-		echo $timelineInnerData ;	
+	// get the timeline 		
+			$user_time_line = $fbAdapter->getUserActivity( "timeline" );
+			$time_line = displayUserTimeLine($user_time_line );
+			echo $time_line;
 		} catch (Exception $e){
 			echo $e->getMessage();
 		}
-// 		
+			//exit;
+		
+//		echo $fbUserProfile ->displayName; 
+//		echo "<br />" . $fbUserProfile ->profileURL; 
+//		echo "<pre>" ;
+		
+		//print_r( $fbAdapter->config['keys']['id'] );
+		//print_r( $fbAdapter );
+		//print_r( $fbAdapter->getAccessToken() );
+
+		/*
+		$adapter2 = $hybridauth->authenticate( "twitter" );
+		$user_profile2 = $adapter2->getUserProfile();
+		echo "<br>". $user_profile2->displayName; 
+		echo "<br />" . $user_profile2->profileURL; 
+		*/
 ?>		
