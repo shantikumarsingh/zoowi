@@ -55,9 +55,23 @@ return
 				"enabled" => true,
 				"keys"    => array ( "key" => "oMO8chvHmskdLcIEW0X8IagZd", "secret" => "ruAxeccTi4uS5PokQWimyTnVoEhaiSNYZGlKaBH8eEuIiH3UWk" ) 
 			),
+			"Instagram" =>   array ( 
+				"enabled"   => true,
+				"keys"   => array ( "id" => "*****************", "secret" => "*********************************" )
+			), 
+			"Foursquare" => array (
+				"enabled" => true,
+				"keys"    => array ( "id" => "STJVHA0GPK0I3G5JUH05V1EHLD11F0IQX3FG5MEM0YFQEHKG", 
+				"secret" => "JNR4HYIECZ3THEZOSGO1GS3TNZZYVXZMGY5EDRPQAHKMN4WB" ) 
+			),
 
 /*
 
+			"LinkedIn" => array ( 
+				"enabled" => true,
+				"keys"    => array ( "key" => "", "secret" => "" ) 
+			),
+			
 			// windows live
 			"Live" => array ( 
 				"enabled" => true,
@@ -67,18 +81,7 @@ return
 				"enabled" => true,
 				"keys"    => array ( "key" => "", "secret" => "" ) 
 			),
-
-			"LinkedIn" => array ( 
-				"enabled" => true,
-				"keys"    => array ( "key" => "", "secret" => "" ) 
-			),
-
 			*/
-			"Foursquare" => array (
-				"enabled" => true,
-				"keys"    => array ( "id" => "STJVHA0GPK0I3G5JUH05V1EHLD11F0IQX3FG5MEM0YFQEHKG", 
-				"secret" => "JNR4HYIECZ3THEZOSGO1GS3TNZZYVXZMGY5EDRPQAHKMN4WB" ) 
-			),
 		),
 
 		// if you want to enable logging, set 'debug_mode' to true  then provide a writable file by the web server on "debug_file"
