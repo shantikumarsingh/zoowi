@@ -120,7 +120,9 @@
 			echo CHtml::link(' Update Status ',array('fb/updateStatusPage'),array('class'=>'link_on_fb')); 
 			echo '<br />' ; 
 			echo '<br />' ; 
-					
+
+			
+			
 			$config =  './protected/config/hoauth.php';
 			require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
 			$hybridauth = new Hybrid_Auth( $config );
@@ -132,23 +134,26 @@
 			
 	?>
 	
-<img src = "<?php echo $fbUserProfile->photoURL;?>" width= "32" height="32"></img>	
+<img style="width: 32px; height: 32px;"  src = "<?php echo $fbUserProfile->photoURL;?>" width= "32" height="32"></img>	
 	<h3><?php echo  $fbUserProfile->displayName; ?></h3>
 	<?php 
 
-			//$trends = $fbAdapter->api()->api('/trends?country=US&fields=headline,categories,photo_icon');
-			//print_r($trends);
-			//exit;
+		//	$trends = $fbAdapter->api()->api('/trends?country=US&fields=headline,categories,photo_icon');
+		//	print_r($trends);
+		//	exit;
 			
 		
 			$timelineFeeds = $fbAdapter->api()->api('/me/posts');
+			$timelineInnerData='';
+			//echo "<pre>" ; 
+			//print_r($timelineFeeds ) ;
+			//exit;
 			
-			$timelineInnerData=''; 
 			foreach ($timelineFeeds as $key => $feeds){
 				
 				if($key != 'paging')
 					foreach ($feeds as $iKey => $feed){
-					
+						if(isset($feed['message']))
 						 $timelineInnerData .= '<a href="'.$feed['actions'][0]['link'].'" target="__blank"><span>'.$feed['message'].'</span>' ;
 						if(isset($feed['comments']['data'])){
 							foreach($feed['comments']['data'] as $comment){

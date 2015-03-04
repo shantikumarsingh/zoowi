@@ -24,7 +24,7 @@ class HOAuth extends CWidget
 	/**
 	 * @var boolean $onlyIcons the flag that displays social buttons as icons
 	 */
-	public $onlyIcons = false;
+	public $onlyIcons = true;
 
 	/**
 	 * @var integer $popupWidth the width of the popup window
