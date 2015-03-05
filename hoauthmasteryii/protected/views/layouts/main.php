@@ -36,8 +36,8 @@
 			array('label'=>'Social Apps', 'url'=>array('/site/index'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Facebook', 'url'=>array('/fb/index'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Twitter', 'url'=>array('/twitter/index'), 'visible'=>!Yii::app()->user->isGuest),
-			array('label'=>'Linkedin', 'url'=>array('/linkedin/index'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Instagram', 'url'=>array('/instagram/index'), 'visible'=>!Yii::app()->user->isGuest),
+			array('label'=>'Linkedin', 'url'=>array('/linkedin/index'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Profile', 'url'=>array('/user/profile'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
 
