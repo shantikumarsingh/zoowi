@@ -113,15 +113,15 @@
 			$hybridauth = new Hybrid_Auth( $config );
 
 			// https://instagram.com/developer/api-console/
-			$fbAdapter = $hybridauth->authenticate( "instagram" );
+			$fbAdapter = $hybridauth->authenticate( "foursquare" );
 			// display the user profile 
-			$userProfile = $fbAdapter -> getUserProfile();
+		//	$userProfile = $fbAdapter -> getUserProfile();
+		//	print_r($userProfile);
 			
-			$userFeed = $fbAdapter->api()->api('/users/self/feed');
-			echo '<pre>';
-			$feedsHtml = displayUserFeed($userFeed);
-			//print_r($userFeed);
-			echo $feedsHtml ;
+			//$userFeed = $fbAdapter->api()->api('/users/self/feed');
+			//echo '<pre>';
+			//$feedsHtml = displayUserFeed($userFeed);
+			//echo $feedsHtml ;
 			
 			
 		} catch (Exception $e){
