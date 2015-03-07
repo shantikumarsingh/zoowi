@@ -113,16 +113,32 @@
 			$hybridauth = new Hybrid_Auth( $config );
 
 			// https://instagram.com/developer/api-console/
-			$fbAdapter = $hybridauth->authenticate( "foursquare" );
+			$fsAdapter = $hybridauth->authenticate( "foursquare" );
+			// version information to be used for query
+			$version = '20131016';
 			// display the user profile 
-		//	$userProfile = $fbAdapter -> getUserProfile();
-		//	print_r($userProfile);
+				
+				echo '<pre>';
+				
 			
-			//$userFeed = $fbAdapter->api()->api('/users/self/feed');
-			//echo '<pre>';
-			//$feedsHtml = displayUserFeed($userFeed);
-			//echo $feedsHtml ;
-			
+				$userInfo = $fsAdapter->api()->api('/users/self/?v='.$version);
+				
+				$userId  = $userInfo->response->user->id ;
+				 
+				$personInformation = '' ;
+				$personInformation = '<div>';
+				$personInformation .="Person Name " .  
+							$userInfo->response->user->firstName . " " .
+							$userInfo->response->user->lastName . "</span>";
+				
+				$personInformation .= '</div>';
+				echo $personInformation  ;
+				echo "<br />" ;
+				
+				$eventsInfo = $fsAdapter->api()->api('/events/categories?v='.$version);
+				print_r($eventsInfo );
+				
+				
 			
 		} catch (Exception $e){
 			echo $e->getMessage();

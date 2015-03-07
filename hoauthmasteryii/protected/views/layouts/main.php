@@ -38,6 +38,7 @@
 			array('label'=>'Twitter', 'url'=>array('/twitter/index'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Instagram', 'url'=>array('/instagram/index'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Foursquare', 'url'=>array('/foursquare/index'), 'visible'=>!Yii::app()->user->isGuest),
+			array('label'=>'Tumblr', 'url'=>array('/tumblr/index'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Linkedin', 'url'=>array('/linkedin/index'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Profile', 'url'=>array('/user/profile'), 'visible'=>!Yii::app()->user->isGuest),
 			array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
