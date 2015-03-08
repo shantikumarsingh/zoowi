@@ -4,10 +4,15 @@
 }
 .log_form {
 	margin:0 auto;
-	width: 445px !important;
+  float: none;
+	/*width: 445px !important;*/
 }
-.reg_form  .thumbnail {
+.reg_form .thumbnail {
 	padding: 0px 30px 0px;
+}
+.reg_form .form-group .img-thumbnail img {
+  width: 120px;
+  height: 50px;
 }
 .log_form .form-header{
 	margin-bottom: 20px;
@@ -221,4 +226,7 @@ transition: all 0.3s ease-in-out;
 .alert-danger ul {
   list-style: none;
   padding: 0;
+}
+span.required {
+  color: #a94442;
 }
