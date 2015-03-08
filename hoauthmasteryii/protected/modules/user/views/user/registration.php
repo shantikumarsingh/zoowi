@@ -128,11 +128,10 @@
 							<?php $this->widget('CCaptcha'); ?>
 						</div>
 						<?php
-							$htmlOptions=array ('class'=>'form-control', 'placeholder'=>'Please enter above verification code','required'=>'required');
+							$htmlOptions=array ('class'=>'form-control', 'placeholder'=>'Please enter the letters as they are shown in the image above','required'=>'required');
 							echo $form->textField($model,'verifyCode',$htmlOptions);
 						?>
 						<small class="help-block">
-							<?php echo UserModule::t("Please enter the letters as they are shown in the image above."); ?>
 							<?php echo UserModule::t("Letters are not case-sensitive."); ?>
 						</small>
 					</div>

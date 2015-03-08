@@ -92,7 +92,7 @@ transition: all 0.3s ease-in-out;
 }
 
 /*sidebar styles */
-/* .wrapper {
+ .wrapper {
   width: 100%;
   box-sizing: border-box;
   border-top: 2px solid #6c6c6c;
@@ -145,26 +145,8 @@ transition: all 0.3s ease-in-out;
   padding-top: 0;
   font-size: 1.4rem; }
 
-.btn-list {
-  display: inline-block;
-  text-align: center; }
-  .btn-list > li {
-    float: left; }
-  .btn-list > li + li {
-    padding-left: 10px; }
 
-.btn {
-  display: inline-block;
-  text-align: center;
-  padding: 6px 10px;
-  background-color: #313b4e;
-  color: #91a1b9;
-  border-bottom: 4px solid #51648b;
-  font-size: 1.2rem; }
-  .btn:hover {
-    background-color: #6c6c6c;
-    color: #ececec;
-    border-bottom: 4px solid #424242; }
+
 
 .sidebar {
   background-color: #312f2f; }
@@ -218,7 +200,7 @@ transition: all 0.3s ease-in-out;
   position: fixed;
   overflow: hidden; }
 
-*/
+
 
 .checkbox > label > label {
   padding: 0px;
