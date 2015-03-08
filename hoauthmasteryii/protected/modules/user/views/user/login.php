@@ -1,5 +1,4 @@
 <section class="log_wrapper">
-	<div class="container">
 		<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login"); ?>
 
 		
@@ -11,13 +10,10 @@
 		</div>
 
 		<?php endif; ?>
-		<div class="log_form">
+		<div class="log_form col-lg-5 col-md-5 col-sm-12 col-xs-12">
 			<h2 class="text-center">ZOOWIMAMA <small>beta</small></h2>
 			<div class="thumbnail">
-				<?php 
-					$htmlOptions=array ('id'=>'signin_form');
-					echo CHtml::beginForm($htmlOptions);
-				?>
+				<?php echo CHtml::beginForm(); ?>
 					
 					<?php 
 						$htmlOptions=array ('class'=>'alert alert-danger');
@@ -89,5 +85,4 @@ $form = new CForm(array(
     ),
 ), $model);
 ?>
-	</div>
 </section>
