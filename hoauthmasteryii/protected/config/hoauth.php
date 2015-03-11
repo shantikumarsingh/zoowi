@@ -46,8 +46,16 @@ return
 				 		"secret" => "c2ed70bd12e6fb1cc0fa93a389fbaa86" 
 
 				),
-//				 "scope"   => "email, user_about_me, user_birthday, user_hometown, publish_actions", // optional
-				 //"scope"   => "public_profile, basic_info, user_birthday, user_religion_politics, user_relationships, user_relationship_details, user_hometown, user_location, user_likes, user_activities, user_interests, user_education_history, user_work_history, user_website, user_groups, user_events, user_photos, user_videos, user_friends, user_about_me, user_status, user_games_activity, user_tagged_places, user_actions.books, user_actions.music, user_actions.video, user_actions.news, user_actions.fitness", // optional
+				 //"scope"   => "publish_stream,email, user_about_me, user_birthday, user_hometown, publish_actions, user_status, user_activities, read_stream", // optional
+
+				"scope"   => "user_about_me,user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,user_activities,user_birthday,user_education_history,user_events,user_friends,user_games_activity,user_groups,user_hometown,user_interests,user_likes,user_location,user_photos,user_relationship_details ,user_relationships,user_religion_politics,user_status,user_tagged_places,user_videos,user_website ,user_work_history
+				,ads_management,ads_read,email,manage_notifications,manage_pages,publish_actions,read_friendlists,read_insights,read_mailbox,read_page_mailboxes,read_stream,rsvp_event
+				",
+				//"scope"   => "public_profile, basic_info, user_birthday, user_religion_politics, user_relationships, user_relationship_details,
+				 // user_hometown, user_location, user_likes, user_activities, user_interests, user_education_history, 
+				 //user_work_history, user_website, user_groups, user_events, user_photos, user_videos, user_friends, user_about_me, 
+				 //user_status, user_games_activity, user_tagged_places, user_actions.books, user_actions.music, user_actions.video, 
+				 // user_actions.news, user_actions.fitness", // optional
 				"display" => "popup" // optional
 			),
  
@@ -70,12 +78,16 @@ return
 				"secret" => "YSqxxuny9Kjy8BntmF4UbTn6FsVJHfkGGovWaudJSQCfUrhVNi" ) 
 			),
 
-/*
 
 			"LinkedIn" => array ( 
 				"enabled" => true,
-				"keys"    => array ( "key" => "", "secret" => "" ) 
+				"keys"    => array ( "key" => "77lvh5lcnzh4xj", "secret" => "q0uFyLWnWSFSjonT" ) 
 			),
+			"Vimeo" => array ( 
+				"enabled" => true,
+				"keys"    => array ( "key" => "fd22289e4793535c9457b3d4ddf2bf43aa55c31a", "secret" => "5df97557a50d94e8d3ac075341938b8e55bf9f00" ) 
+			),
+/*
 			
 			// windows live
 			"Live" => array ( 
