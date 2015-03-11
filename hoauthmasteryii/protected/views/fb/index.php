@@ -141,28 +141,55 @@
 		//	$trends = $fbAdapter->api()->api('/trends?country=US&fields=headline,categories,photo_icon');
 		//	print_r($trends);
 		//	exit;
-			
+		//	exit;
+
+	// checking the files 
 		
 			$timelineFeeds = $fbAdapter->api()->api('/me/posts');
+			//echo "<pre>" ;print_r($timelineFeeds); exit;
 			$timelineInnerData='';
-			//echo "<pre>" ; 
-			//print_r($timelineFeeds ) ;
-			//exit;
-			
 			foreach ($timelineFeeds as $key => $feeds){
 				
 				if($key != 'paging')
 					foreach ($feeds as $iKey => $feed){
 						if(isset($feed['message']))
+						$timelineInnerData.='
+							<div class="container" data-toggle="modal" data-target="#'.$feed['id'].'">
+							  '.$feed['message'].'
+							</div>
+						';
+						$timelineInnerData.='
+						<div class="modal fade" id="'.$feed['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+						      </div>
+						      <div class="modal-body">
+						';
+						if(isset($feed['message']))
 						 $timelineInnerData .= '<a href="'.$feed['actions'][0]['link'].'" target="__blank"><span>'.$feed['message'].'</span>' ;
 						if(isset($feed['comments']['data'])){
 							foreach($feed['comments']['data'] as $comment){
-								$timelineInnerData  .= $comment['message'] . '  Likes  '. $comment['like_count'] . "<br />" ;
+								$timelineInnerData  .=  $comment['message'] . '  Likes  '. $comment['like_count'] ;
 							}		
 						}
-						$timelineInnerData .='</a><br />';
+						$timelineInnerData .='</a>';
+							//footer data
+						$timelineInnerData .='
+							</div>
+						      <div class="modal-footer">
+								<input type"text" />							      
+						        <button type="button" class="btn btn-primary">Post</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						';
 					}
-			}			
+			}
+			
 		echo $timelineInnerData ;	
 		} catch (Exception $e){
 			echo $e->getMessage();
