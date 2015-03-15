@@ -2,7 +2,7 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name;
-$this->widget('ext.hoauth.widgets.HOAuth');
+//$this->widget('ext.hoauth.widgets.HOAuth');
 
 function shuffle_assoc($list) { 
 	if (!is_array($list)) return ;
@@ -236,9 +236,14 @@ function shuffle_assoc($list) {
 		$html ='';
 		if(isset($messagePost['message'])) {
 			$html = '
+				<div class="panel panel-default">
+				<div class="panel-body">
 				<div type="button" class="row" data-toggle="modal" data-target="#'.$messagePost['id'].'">
 				  '.$messagePost['message'].'
 				</div>
+				</div>
+				</div>
+
 					<div class="modal fade" id="'.$messagePost['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
@@ -305,7 +310,7 @@ function htmlizeTwitterData($twitterPost){
 	$finalResult = shuffle_assoc($finalResult) ; 
 	//print_r($finalResult); exit;
 	foreach( $finalResult as $post){
-	
+		
 		/**
 		 * formats the Post and displays as plain HTML
 		 */

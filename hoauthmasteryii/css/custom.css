@@ -44,6 +44,7 @@
 }
 .navbar-default {
 	background-color: #211f2a;
+  margin-bottom: 0px;
 }
 .navbar-default .navbar-nav>.active>a,
 .navbar-default .navbar-nav>.active>a:hover {
@@ -149,23 +150,30 @@ transition: all 0.3s ease-in-out;
 
 
 .sidebar {
-  background-color: #312f2f; }
-  .sidebar li + li {
-    margin-top: 12px; }
-  .sidebar li a {
-    padding: 4px 10px;
-    display: block;
-    color: #cecece; }
-    .sidebar li a:hover {
-      background-color: #424242; }
-  .sidebar li .current {
-    background-color: #51648b; }
+  background-color: #312f2f;
+}
+.sidebar li + li {
+  margin-top: 12px;
+}
+.sidebar li a {
+  padding: 4px 10px;
+  display: block;
+  color: #cecece;
+}
+.sidebar li a:hover {
+  background-color: #424242;
+}
+.sidebar li .current {
+  background-color: #51648b;
+}
 .jsc-sidebar {
   position: fixed;
-  top: 0;
+  top: 0px;
   left: 0;
   width: 220px;
-  height: 100%; }
+  height: 100%;
+  padding: 20px;
+}
 
 .jsc-sidebar-content {
   position: relative;
@@ -173,7 +181,8 @@ transition: all 0.3s ease-in-out;
   left: 0;
   min-height: 100%;
   z-index: 10;
-  background-color: #FFF; }
+  background-color: #FFF;
+}
 
 .jsc-sidebar-pulled {
   -webkit-transition: -webkit-transform 0.5s ease;
@@ -187,18 +196,21 @@ transition: all 0.3s ease-in-out;
   -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000; }
+  -webkit-perspective: 1000;
+}
 
 .jsc-sidebar-pushed {
   -webkit-transform: translate3d(220px, 0, 0);
   -moz-transform: translate3d(220px, 0, 0);
   -ms-transform: translate3d(220px, 0, 0);
   -o-transform: translate3d(220px, 0, 0);
-  transform: translate3d(220px, 0, 0); }
+  transform: translate3d(220px, 0, 0);
+}
 
 .jsc-sidebar-scroll-disabled {
   position: fixed;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 
 
@@ -211,4 +223,38 @@ transition: all 0.3s ease-in-out;
 }
 span.required {
   color: #a94442;
+}
+
+.badge-danger {
+  background-color: #d9534f;
+}
+.navbar-form {
+  background-color: #FFFFFF;
+  border-radius: 20px;
+}
+.navbar-form .btn {
+  background: #fff;
+}
+.navbar-form .form-control{
+  border: 1px solid rgba(204, 204, 204, 0);
+  box-shadow: none;
+}
+.navbar-form .form-control:focus {
+  border-color: rgba(102, 175, 233, 0);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0),0 0 8px rgba(102, 175, 233, 0);
+}
+
+#toTop{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  display: none;
+  z-index: 333;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.44);
+}
+
+#content {
+  min-height: 458px;
 }

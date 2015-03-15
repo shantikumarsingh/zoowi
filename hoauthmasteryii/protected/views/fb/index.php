@@ -154,8 +154,8 @@
 					foreach ($feeds as $iKey => $feed){
 						if(isset($feed['message']))
 						$timelineInnerData.='
-							<div class="container" data-toggle="modal" data-target="#'.$feed['id'].'">
-							  '.$feed['message'].'
+							<div class="panel panel-default" data-toggle="modal" data-target="#'.$feed['id'].'">
+							  <div class="panel-body">'.$feed['message'].'</div>
 							</div>
 						';
 						$timelineInnerData.='
@@ -169,9 +169,11 @@
 						      <div class="modal-body">
 						';
 						if(isset($feed['message']))
-						 $timelineInnerData .= '<a href="'.$feed['actions'][0]['link'].'" target="__blank"><span>'.$feed['message'].'</span>' ;
-						if(isset($feed['comments']['data'])){
-							foreach($feed['comments']['data'] as $comment){
+							$timelineInnerData .= '<a href="'.$feed['actions'][0]['link'].'" target="__blank"><span>'.$feed['message'].'</span>' ;
+						if(isset($feed['comments']['data']))
+						{
+							foreach($feed['comments']['data'] as $comment)
+							{
 								$timelineInnerData  .=  $comment['message'] . '  Likes  '. $comment['like_count'] ;
 							}		
 						}
