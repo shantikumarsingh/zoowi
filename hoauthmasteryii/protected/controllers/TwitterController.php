@@ -13,8 +13,6 @@ class TwitterController extends Controller
 	{
 		return array(
 
-			// page action renders "static" pages stored under 'protected/views/site/pages'
-			// They can be accessed via: index.php?r=site/page&view=FileName
 			'page'=>array(
 				'class'=>'CViewAction',
 			),
@@ -28,8 +26,9 @@ class TwitterController extends Controller
 	public function actionIndex()
 	{
 
+		
 			if(Yii::app()->user->isGuest)
-			Yii::app()->user->loginRequired();
+				Yii::app()->user->loginRequired();
 			$this->render('index');
 		
 		
@@ -60,6 +59,7 @@ class TwitterController extends Controller
 			
 	}
 	public function actionPostToProvider(){
+
 		
 			$config =  './protected/config/hoauth.php';
 			require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
@@ -71,7 +71,6 @@ class TwitterController extends Controller
 		    array(
 		       	"message" => $_POST ['postToProviders'], //" Simple test with image accessible from web", // status or message content
 		    ));
-		   //Yii::app()->user->setFlash('success','Post has been posted .'); 
 		    Yii::app()->end();
 	}
 	/**
@@ -105,5 +104,16 @@ class TwitterController extends Controller
 		
 		
 	}
-	
+	public function actionRetweetStatus(){
+		
+		$id = '572620593981366273';
+		$config =  './protected/config/hoauth.php';
+		require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
+		$hybridauth = new Hybrid_Auth( $config );
+		$twitterAdapter = $hybridauth->authenticate( "twitter" );
+		$access_token = $twitterAdapter ->getAccessToken();
+		
+		$tweeted = $twitterAdapter->api()->api('/statuses/retweet/'.$id.'.json&access_token='.$access_token['access_token']);
+		print_r($tweeted);
+	}
 }

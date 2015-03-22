@@ -4,7 +4,7 @@ use Facebook\FacebookRequest;
 use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
 
-class FBController extends Controller
+class FbController extends Controller
 {
 	/**
 	 * Declares class-based actions.
@@ -27,13 +27,8 @@ class FBController extends Controller
 	 */
 	public function actionIndex()
 	{
-
 			if(Yii::app()->user->isGuest)
 			Yii::app()->user->loginRequired();
-		
-//		Yii::app()->clientScript->registerScriptFile('http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js',CClientScript::POS_END);		
-//		Yii::app()->clientScript->registerScriptFile('./js/jquery/1.11.2/jquery.min.js',CClientScript::POS_END);		
-		//Yii::app()->clientScript->registerScriptFile('http://connect.facebook.net/en_US/all.js',CClientScript::POS_END);		
 		$this->render('index');
 		
 		
@@ -59,7 +54,7 @@ class FBController extends Controller
 	public function actionPostPage(){
 		if(Yii::app()->user->isGuest)
 			Yii::app()->user->loginRequired();
-		Yii::app()->clientScript->registerScriptFile('./js/jquery/1.11.2/jquery.min.js',CClientScript::POS_END);			
+		//Yii::app()->clientScript->registerScriptFile('./js/jquery/1.11.2/jquery.min.js',CClientScript::POS_END);			
 		$this->render('post');	
 			
 	}
@@ -70,12 +65,29 @@ class FBController extends Controller
 			$hybridauth = new Hybrid_Auth( $config );
 
 			$fbAdapter = $hybridauth->authenticate( "facebook" );
-			
+			try{
+			$fbUserProfile = $fbAdapter->getUserProfile();
+				echo "<pre>";
+				$access_token = $fbAdapter->getAccessToken();
+			//$commentPost= $fbAdapter->api()->api('197535293612901_937409339625489/?access_token='.$access_token['access_token'].'&message=ha this is a test from app&parent=937409339625489_937418522957904');
+			$commentPost= $fbAdapter->api()->api('937409339625489_937418522957904/?access_token='.$access_token['access_token'].'&message=ha this is a test from app&parent=197535293612901_937409339625489');
+			} catch( FacebookApiException $e ){
+				throw new Exception( "comment posting Failed! {$this->providerId} returned an error: $e");
+				error_log('here ');
+			} 
+			print_r($commentPost);
+
+			//  the below code likes the post 
+			//$likeComment= $fbAdapter->api()->api('1403484586624470_1409893302650265/likes', 'post');
+			//print_r($comment);
+			echo " here without error" ;
+/*
+			//$_POST ['postToProviders'] = 'this is a test post again' ;
 		$fbAdapter->setUserStatus(
 		    array(
 		       	"message" => $_POST ['postToProviders'], //" Simple test with image accessible from web", // status or message content
 		    ));
-		   //Yii::app()->user->setFlash('success','Post has been posted .'); 
+*/		    
 		    Yii::app()->end();
 	}
 	/**

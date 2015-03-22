@@ -1,6 +1,6 @@
 <?php
 
-class FourSquareController extends Controller
+class FoursquareController extends Controller
 {
 	/**
 	 * Declares class-based actions.
