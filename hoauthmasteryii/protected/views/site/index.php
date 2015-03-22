@@ -2,7 +2,7 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name;
-//$this->widget('ext.hoauth.widgets.HOAuth');
+$this->widget('ext.hoauth.widgets.HOAuth');
 
 function shuffle_assoc($list) { 
 	if (!is_array($list)) return ;

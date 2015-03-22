@@ -130,36 +130,43 @@
 			$fbAdapter = $hybridauth->authenticate( "facebook" );
 			$fbUserProfile = $fbAdapter->getUserProfile();
 			// UserId for Facebook account
-			$fbIdentifier = $fbUserProfile->identifier;
+			
+			$fbIdentifier = $fbUserProfile->identifier; 
+			echo "<br />" . $fbIdentifier  ;
 			
 	?>
 	
 <img style="width: 32px; height: 32px;"  src = "<?php echo $fbUserProfile->photoURL;?>" width= "32" height="32"></img>	
 	<h3><?php echo  $fbUserProfile->displayName; ?></h3>
 	<?php 
-
-		//	$trends = $fbAdapter->api()->api('/trends?country=US&fields=headline,categories,photo_icon');
-		//	print_r($trends);
-		//	exit;
-		//	exit;
-
-	// checking the files 
-		
-			$timelineFeeds = $fbAdapter->api()->api('/me/posts');
-			//echo "<pre>" ;print_r($timelineFeeds); exit;
+			$access_token = $fbAdapter->getAccessToken();
+			$timelineFeeds = $fbAdapter->api()->api('/'.$fbIdentifier.'?fields=home.filter(others){message,id,from,picture,actions,shares,likes,comments}');
 			$timelineInnerData='';
-			foreach ($timelineFeeds as $key => $feeds){
-				
-				if($key != 'paging')
-					foreach ($feeds as $iKey => $feed){
-						if(isset($feed['message']))
-						$timelineInnerData.='
-							<div class="panel panel-default" data-toggle="modal" data-target="#'.$feed['id'].'">
-							  <div class="panel-body">'.$feed['message'].'</div>
-							</div>
-						';
-						$timelineInnerData.='
-						<div class="modal fade" id="'.$feed['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			$feeds = $timelineFeeds['home']['data'];
+			foreach ($feeds as $key => $feed){
+				if(isset($feed['picture']))
+					$picture = $feed['picture'];
+				if(isset($feed['shares']))
+					$shares = $feed['shares']['count'];
+					
+				if(isset($feed['message'])){
+					$likes = '';
+
+					$id = $feed['id'];
+					$message = $feed['message'];
+					$likes = count($feed['likes']['data']);
+					$link = count($feed['actions'][0]['link']);
+					$comments = $feed['comments']['data'];
+						
+					$timelineInnerData.='
+						<div class="panel panel-default" data-toggle="modal" data-target="#'.$id.'">
+						  <div class="panel-body"><img src="'.$picture.'" style="width:32px;height:32px;" />
+						  '.$message.' 
+						  </div>
+						</div>
+					';
+					$timelineInnerData.='
+						<div class="modal fade" id="'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -167,17 +174,23 @@
 						        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
 						      </div>
 						      <div class="modal-body">
-						';
-						if(isset($feed['message']))
-							$timelineInnerData .= '<a href="'.$feed['actions'][0]['link'].'" target="__blank"><span>'.$feed['message'].'</span>' ;
-						if(isset($feed['comments']['data']))
-						{
-							foreach($feed['comments']['data'] as $comment)
-							{
-								$timelineInnerData  .=  $comment['message'] . '  Likes  '. $comment['like_count'] ;
-							}		
-						}
-						$timelineInnerData .='</a>';
+							      <div class="col-md-9 col-md-push-3">
+									<img style="width:128px;height:128px;" src="'.$picture.'" />
+							      </div>
+							      <div class="col-md-9 col-md-push-3">
+									'.$message.'
+							      </div>
+							      <div class="col-md-9 col-md-push-3">
+									Likes '.$likes.' Shares '.$shares.'
+							      </div>
+									';
+								if(isset($comments))
+								foreach ($comments as $comment){
+									$timelineInnerData.='
+							      <div class="col-md-9 col-md-push-3">'. $comment['message'].'</div>					
+							      <div class="col-md-9 col-md-push-3"> Likes '.$comment['like_count'].'</div>';
+								}
+
 							//footer data
 						$timelineInnerData .='
 							</div>
@@ -187,12 +200,12 @@
 						      </div>
 						    </div>
 						  </div>
-						</div>
-						';
-					}
+						</div>';
+					
+				}
 			}
-			
 		echo $timelineInnerData ;	
+			
 		} catch (Exception $e){
 			echo $e->getMessage();
 		}
