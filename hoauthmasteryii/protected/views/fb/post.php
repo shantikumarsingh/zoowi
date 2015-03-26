@@ -32,7 +32,7 @@
 	
 	$name = 'postToProviders'; 
 	$value = '';
-	echo CHtml::textArea($name, $value, array('id'=>'postToProviders', 'rows'=>15, 'cols'=>75));
+	echo CHtml::textArea($name, $value, array('id'=>'postToProviders','rows'=>15, 'cols'=>75));
 
 ?>
 	<div class="row submit">

@@ -1,3 +1,4 @@
+
 <?php
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
@@ -58,6 +59,55 @@ class FbController extends Controller
 		$this->render('post');	
 			
 	}
+	
+	public function actionCurlPostTOProvder(){
+		
+		$fbIdentifier = '1403484586624470';
+		$url = 'https://graph.facebook.com/' . $fbIdentifier  . '/feed';
+		
+		$config =  './protected/config/hoauth.php';
+		require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
+		$hybridauth = new Hybrid_Auth( $config );
+		$fbAdapter = $hybridauth->authenticate( "facebook" );
+		try{
+		$access_token = $fbAdapter->getAccessToken();
+		$app_secret = '8fd4cabe2de8bc79395a56a44fe831ae';
+		$appsecret_proof= hash_hmac('sha256', $access_token['access_token'], $app_secret);
+
+		$id = $_POST['id'];
+		//$id = '10153142134977999_10153142144877999';
+		$message = $_POST['message'];
+		if( isset($id ) && isset($message)  ) {
+		    $url = "https://graph.facebook.com/{$id}/comments";
+		    $attachment =  array(
+		            'access_token'  => $access_token['access_token'],
+		            'message'       => $message, //"Puma! Lovely shoes in wide Range of Collection",
+					'appsecret_proof'=>$appsecret_proof
+		    );
+		
+		    $ch = curl_init();
+		    curl_setopt($ch, CURLOPT_URL, $url);
+		    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+		    curl_setopt($ch, CURLOPT_POST, true);
+		    curl_setopt($ch, CURLOPT_POSTFIELDS, $attachment);
+		    curl_setopt($ch, CURLOPT_HEADER, 0);
+		    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		    $comment = curl_exec($ch);
+		    curl_close ($ch);
+		    $comment = json_decode($comment, TRUE);
+		    if(isset($comment['id'] ))
+		    	echo "success" ;
+		    exit(0);	
+		    //print_r($comment);
+		}	
+	}catch(Exception $e){
+		
+		
+	}
+	
+}
+	
 	public function actionPostToProvider(){
 		
 			$config =  './protected/config/hoauth.php';
@@ -69,8 +119,15 @@ class FbController extends Controller
 			$fbUserProfile = $fbAdapter->getUserProfile();
 				echo "<pre>";
 				$access_token = $fbAdapter->getAccessToken();
+				$app_secret = 'c2ed70bd12e6fb1cc0fa93a389fbaa86';
+				$appsecret_proof= hash_hmac('sha256', $access_token['access_token'], $app_secret); 
+				
+//			exit;	
 			//$commentPost= $fbAdapter->api()->api('197535293612901_937409339625489/?access_token='.$access_token['access_token'].'&message=ha this is a test from app&parent=937409339625489_937418522957904');
-			$commentPost= $fbAdapter->api()->api('937409339625489_937418522957904/?access_token='.$access_token['access_token'].'&message=ha this is a test from app&parent=197535293612901_937409339625489');
+//			$commentPost= $fbAdapter->api()->api('116151972998_10153139619852999/?access_token='.$access_token['access_token'].'&message=Milan is a Great team&parent=197535293612901_937409339625489&appsecret_proof='.$appsecret_proof);
+
+				
+			$commentPost= $fbAdapter->api()->api('/116151972998_10153139619852999/comments', 'post',  "message : comment post" );
 			} catch( FacebookApiException $e ){
 				throw new Exception( "comment posting Failed! {$this->providerId} returned an error: $e");
 				error_log('here ');
@@ -80,7 +137,7 @@ class FbController extends Controller
 			//  the below code likes the post 
 			//$likeComment= $fbAdapter->api()->api('1403484586624470_1409893302650265/likes', 'post');
 			//print_r($comment);
-			echo " here without error" ;
+			//echo " here without error" ;
 /*
 			//$_POST ['postToProviders'] = 'this is a test post again' ;
 		$fbAdapter->setUserStatus(
@@ -118,6 +175,23 @@ class FbController extends Controller
 		    
 		    ));
 **/		    
+		
+		
+	}
+	
+	public function actionShareWithProvider(){
+		
+		
+		$config =  './protected/config/hoauth.php';
+		require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
+		$hybridauth = new Hybrid_Auth( $config );
+		$fbAdapter = $hybridauth->authenticate( "facebook" );
+		$fbIdentifier = '1403484586624470';
+		$linkUrl = 'https://www.facebook.com/1463400223890245/posts/1626350464261886';
+		$message = 'To the general public';
+		$sharePost= $fbAdapter->api()->api('/'.$fbIdentifier.'/links/1463400223890245_1626350464261886?link='.$linkUrl.'&message='.$message );
+		print_r($sharePost);
+		echo "The post has been shared";
 		
 		
 	}

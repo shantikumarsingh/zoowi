@@ -1,8 +1,82 @@
+<div class="form-group has-error" id="formResult"></div>
+	<div class="form">
+	<?php $form=$this->beginWidget('CActiveForm', array(
+	 'id'=>'user-form',
+	 'enableAjaxValidation'=>false,
+	)); ?>
+	<?php 
+		$name = 'postToProviders'; 
+		$value = '';
+		echo CHtml::textArea($name, $value, array('id'=>$name, "placeholder"=>"What's on your mind?" , 'rows'=>3, 'cols'=>75));
+		echo CHtml::checkBoxList('providersCheckList',$selected_Array=array('twitter', 'facebook'),array('facebook'=>'facebook','twitter'=>'Titter'));
+	
+	?>
+	<div class="row submit">
+	        <div id="textCounter" style="font:15px Arial;">140 Characters limit</div>
+	        <?php
+				$ajaxOptions=array ( );
+				$url = 'index.php?r=utility/PostSelectedProviders';
+				$label = 'Post';
+				$htmlOptions=array ( );
+	     		echo CHtml::ajaxSubmitButton($label, 
+			        $url, 
+			         array(
+			              	'data'=>'js:jQuery(this).parents("form").serialize() + ""',
+			          		'beforeSend'=>'js:function(){
+			          			var errText ="";
+			          			if($("#postToProviders").val()==""){			
+                       				errText += "Update Status Field Empty<br />";
+                       				
+                                }
+                                if(	!$("#providersCheckList_0").is(":checked") && 
+                                	!$("#providersCheckList_1").is(":checked")	 )
+                                	errText += "Check at least one Provider <br />";
+                                if(errText !="")
+                                	$("#formResult").html(errText);
+                                	
+                             }',       
+			              	'success'=>'function(data){
+			              		//alert(data);
+	              				//if(data!=="Error");
+			                    //$("#postToProviders").val("");
+		                   	}'
+			          ), 
+			         array(
+			              'id'=>'ajaxSubmitBtn', 
+			              'name'=>'ajaxSubmitBtn'
+			         )); 
+		      $this->endWidget();  
+	        ?>
+	</div>
+</div><!-- form -->    
+
+     
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+		    $('#postToProviders').on('input propertychange', function() {
+				CharLimit(this, 140);
+		    });
+		});
+		
+		function CharLimit(input, maxChar) {
+			//$("#formResult").html('');
+		    var len = $(input).val().length;
+		    $('#textCounter').text(maxChar - len + ' characters remaining');
+		    
+		    if (len > maxChar) {
+		        $(input).val($(input).val().substring(0, maxChar));
+		        $('#textCounter').text('You have ' +0 + ' characters Left');
+		    }
+		}
+	
+	</script>
+
 <?php
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name;
-$this->widget('ext.hoauth.widgets.HOAuth');
+//$this->widget('ext.hoauth.widgets.HOAuth');
 
 function shuffle_assoc($list) { 
 	if (!is_array($list)) return ;

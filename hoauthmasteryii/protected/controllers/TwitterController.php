@@ -65,7 +65,7 @@ class TwitterController extends Controller
 			require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
 			$hybridauth = new Hybrid_Auth( $config );
 
-			$fbAdapter = $hybridauth->authenticate( "facebook" );
+			$fbAdapter = $hybridauth->authenticate( "twitter" );
 			
 		$fbAdapter->setUserStatus(
 		    array(
@@ -104,16 +104,12 @@ class TwitterController extends Controller
 		
 		
 	}
+	
+	/**
+	 * Need to implement the Retweet Status
+	 */
+
 	public function actionRetweetStatus(){
 		
-		$id = '572620593981366273';
-		$config =  './protected/config/hoauth.php';
-		require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
-		$hybridauth = new Hybrid_Auth( $config );
-		$twitterAdapter = $hybridauth->authenticate( "twitter" );
-		$access_token = $twitterAdapter ->getAccessToken();
-		
-		$tweeted = $twitterAdapter->api()->api('/statuses/retweet/'.$id.'.json&access_token='.$access_token['access_token']);
-		print_r($tweeted);
 	}
 }

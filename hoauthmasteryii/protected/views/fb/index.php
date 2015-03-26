@@ -74,7 +74,7 @@
 	 */
 	
 	function displayUserTimeLine($user_activity){
-		echo "<pre>";
+		//echo "<pre>";
 		print_r($user_activity);
 		exit;
 		$timeline = '<div>' ;	
@@ -132,72 +132,123 @@
 			// UserId for Facebook account
 			
 			$fbIdentifier = $fbUserProfile->identifier; 
-			echo "<br />" . $fbIdentifier  ;
-			
+			//echo "<br />" . $fbIdentifier  ;
+//			echo '<pre>' ;
+//			$profileImage = $fbAdapter->api()->api('/880000108713199/picture?redirect=0&height=200&width=200&type=normal');
+//			print_r($profileId);
+//			exit;
 	?>
 	
 <img style="width: 32px; height: 32px;"  src = "<?php echo $fbUserProfile->photoURL;?>" width= "32" height="32"></img>	
 	<h3><?php echo  $fbUserProfile->displayName; ?></h3>
+	<div class="row feed-list">
 	<?php 
+
 			$access_token = $fbAdapter->getAccessToken();
-			$timelineFeeds = $fbAdapter->api()->api('/'.$fbIdentifier.'?fields=home.filter(others){message,id,from,picture,actions,shares,likes,comments}');
+			//$timelineFeeds = $fbAdapter->api()->api('/me/home');
+			$timelineFeeds = $fbAdapter->api()->api('/'.$fbIdentifier.'?fields=home.filter(others){message,id,from,picture,actions,shares,likes,comments,photos}');
 			$timelineInnerData='';
+//			echo "<pre>" ;
+//	print_r($timelineFeeds);exit;
 			$feeds = $timelineFeeds['home']['data'];
 			foreach ($feeds as $key => $feed){
+				
+				//error_log(' Key ' . $key );
+				
 				if(isset($feed['picture']))
 					$picture = $feed['picture'];
 				if(isset($feed['shares']))
 					$shares = $feed['shares']['count'];
-					
+				
 				if(isset($feed['message'])){
+					
 					$likes = '';
 
 					$id = $feed['id'];
+					$from = $feed['from']['name'];
+					$fromId = $feed['from']['id'];
 					$message = $feed['message'];
 					$likes = count($feed['likes']['data']);
 					$link = count($feed['actions'][0]['link']);
 					$comments = $feed['comments']['data'];
+					
+					$post_created_time = '';
+//					if(isset($feed['created_time]']))
+						$post_created_time = timestamp_to_relative_time( strtotime($feeds[$key]['created_time']));
+					
+					$personProfileImage = $fbAdapter->api()->api('/'.$fromId.'/picture?redirect=0&height=200&width=200&type=normal');
+					$personProfileImageData = $personProfileImage ['data']['url'];
 						
 					$timelineInnerData.='
-						<div class="panel panel-default" data-toggle="modal" data-target="#'.$id.'">
-						  <div class="panel-body"><img src="'.$picture.'" style="width:32px;height:32px;" />
-						  '.$message.' 
-						  </div>
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+							<a href="#" class="center-block panel panel-default" data-toggle="modal" data-target="#'.$id.'">
+						  		<div class="panel-body">
+							  		<div class="media">
+							  			<div class="media-left">
+							  				<img style="width32px;height:32px;" src="'.$personProfileImageData.'" /> 
+							  				<span aria-hidden="true">'.$from.'</span>
+							  				<span aria-hidden="true">'.$from.'</span>
+							  				<span aria-hidden="true"> '.$post_created_time.'</span>
+							  			</div>
+							  			<div class="media-body">
+							  				'.$message.'
+							  			</div>
+							  		</div>
+							  	</div>
+							</a>
 						</div>
 					';
 					$timelineInnerData.='
-						<div class="modal fade" id="'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-						      </div>
-						      <div class="modal-body">
-							      <div class="col-md-9 col-md-push-3">
-									<img style="width:128px;height:128px;" src="'.$picture.'" />
-							      </div>
-							      <div class="col-md-9 col-md-push-3">
-									'.$message.'
-							      </div>
-							      <div class="col-md-9 col-md-push-3">
-									Likes '.$likes.' Shares '.$shares.'
-							      </div>
+						<div class="modal fade" id="'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+						  	<div class="modal-dialog">
+							    <div class="modal-content">
+							      	<div class="modal-header">
+							        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							        	<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+							      	</div>
+							      	<div class="modal-body">
+							      		<ul class="media-list">
+									    	<li class="media">
+										    	<div class="media-left">
+													<img src="'.$picture.'" />
+										    	</div>
+										    	<div class="media-body">
+													'.$message.'
+													<p>
+														Likes ('.$likes.') | Shares ('.$shares.')
+													</p>
+									    			<div class="media">
 									';
 								if(isset($comments))
 								foreach ($comments as $comment){
+									//$profileImage = $fbAdapter->api()->api('/'.$comment['from']['id'].'/picture?redirect=0&height=32&width=32&type=normal');
+									$profileImage ['data']['url']= './images/profileuser.png';
 									$timelineInnerData.='
-							      <div class="col-md-9 col-md-push-3">'. $comment['message'].'</div>					
-							      <div class="col-md-9 col-md-push-3"> Likes '.$comment['like_count'].'</div>';
+								    	<div class="media-left">
+								    		<!-- Need to replace the image src -->
+								    		<img style= "width:px;height32px;" id="'.$comment['from']['id']. '" src="'.$profileImage ['data']['url'].'" />
+								    		<span>'.$comment['from']['name']. '</span>
+								    	</div>
+						    			<div class="media-body">
+							      			<h4>'. $comment['message'].'</h4>
+							      			<p> Likes ('.$comment['like_count'].')</p>
+							      			<span id="'.$comment['id'].'_span"></span>
+							      			<input type"text" id="'.$comment['id'].'_comment"/>							      
+								        	<button type="button" class="btn btn-primary" onclick="postRepliesToComments(\''.$comment['id'].'\') ">Post</button>
+							      		</div>';
+														
 								}
 
 							//footer data
 						$timelineInnerData .='
-							</div>
-						      <div class="modal-footer">
-								<input type"text" />							      
-						        <button type="button" class="btn btn-primary">Post</button>
-						      </div>
+									    			</div>
+										      	</div>
+									    	</li>
+							      		</ul>
+								</div>
+						      	<div class="modal-footer">
+									
+						      	</div>
 						    </div>
 						  </div>
 						</div>';
@@ -211,3 +262,25 @@
 		}
 // 		
 ?>		
+</div>
+<script type="text/javascript" >
+
+postRepliesToComments = function (id){
+	
+	var url = "index.php?r=fb/CurlPostTOProvder";
+	var message  = $("#"+id+"_comment").val();
+	var data = 'id='+ id  + '&message='+ message;
+
+	  $.ajax({
+	        type:"POST",
+	        cache:false,
+	        url:url,
+	        data:data,    // multiple data sent using ajax
+	        success: function (html) {
+		//		alert('posted successfully');
+				$("#"+id+"_comment").val('') ;
+				$("#"+id+"_span").html(message) ;
+	        }
+	      });
+};
+</script>

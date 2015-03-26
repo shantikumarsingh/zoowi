@@ -97,59 +97,59 @@
 	function formatTimeline($user_time_line){
 		$formatTimelineHtml = '' ;
 		foreach ($user_time_line as $key=> $timeLine) {
-//			$image = '';
-				$image = $timeLine->user->profile_image_url_https ;
+			$image = $timeLine->user->profile_image_url_https ;
   			$text  = $timeLine->text  ;
 			if(isset($timeLine->retweeted_status->text)){
 				$image = $timeLine->retweeted_status->user->profile_image_url_https ;
 				$text = $timeLine->retweeted_status->text  ;
-				
 			}
+			$formatTimelineHtml  .='
+				<div class="container" data-toggle="modal" data-target="#'.$timeLine->id_str.'">
+				  
+					<img src="'.$image.'" style="width:32px;height:32px;" />
+				
+				'.$text.'
+				</div>
+			';
+			$twitterAction  = 
+				'<script type="text/javascript" async src="//platform.twitter.com/widgets.js"></script>
+				<a href="https://twitter.com/intent/tweet?in_reply_to='.$timeLine->id_str.'"><i class="fa fa-reply"></i></a>
+				<a href="https://twitter.com/intent/retweet?tweet_id='.$timeLine->id_str.'"><i class="fa fa-retweet"></i></a> '.$timeLine->retweet_count .'
+				<a href="https://twitter.com/intent/favorite?tweet_id='.$timeLine->id_str.'"><i class="fa fa-star"></i></a> '.$timeLine->favorite_count ;
+	
 			
-
-/*
-			//echo $text;
-*/			
-//			print_r($timeLine) ; 
-					$formatTimelineHtml  .='
-						<div class="container" data-toggle="modal" data-target="#'.$timeLine->id_str.'">
-						  
-							<img src="'.$image.'" style="width:32px;height:32px;" />
-						
-						'.$text.'
-						</div>
-					';
-					$formatTimelineHtml .='
-						<div class="modal fade" id="'.$timeLine->id_str.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-						      </div>
-						      <div class="modal-body">
-							<img src="'.$image.'" style="width:32px;height:32px;" />
-						';
-				 		$formatTimelineHtml .= $text ;
-	 					$formatTimelineHtml  .='<div>';
-						//$formatTimelineHtml  .=" <span> display text "  .  $text . "</span> " ; 
-						$formatTimelineHtml  .=" <span> Tweet Count "  .  $timeLine->retweet_count . "</span>" ; 
-						$formatTimelineHtml  .= " <span> Favourite Count "  .  $timeLine->favorite_count. "</span>" ;
-						$formatTimelineHtml  .='</div> ';
-							 		
-				 		
-						$formatTimelineHtml .='
-							</div>
-						      <div class="modal-footer">
-								<input type"text" />							      
-						        <button type="button" class="btn btn-primary">Post</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-						';			
+			$formatTimelineHtml .='
+				<div class="modal fade" id="'.$timeLine->id_str.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				      </div>
+				      <div class="modal-body">
+					<img src="'.$image.'" style="width:32px;height:32px;" />
+				';
+				if(isset($timeLine->extended_entities->media))
+					foreach($timeLine->extended_entities->media as $media){
+	 					$formatTimelineHtml .= '<img style="width:568px;height:379px" src="'.$media->media_url_https.'" />' ;
+					}	
 					
-			
+		 		$formatTimelineHtml .= $text ;
+ 				$formatTimelineHtml  .='<div>';
+				//$formatTimelineHtml  .=" <span> display text "  .  $text . "</span> " ; 
+	//			$formatTimelineHtml  .=" <span> Tweet Count "  .  $timeLine->retweet_count . "</span>" ; 
+	//			$formatTimelineHtml  .= " <span> Favourite Count "  .  $timeLine->favorite_count. "</span>" ;
+				$formatTimelineHtml  .='</div> ';
+				$formatTimelineHtml .='
+					</div>
+				      <div class="modal-footer">';
+						$formatTimelineHtml  .= $twitterAction ;
+						$formatTimelineHtml  .= '
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				';			
 		}
 		return $formatTimelineHtml ;
 	}
@@ -193,21 +193,14 @@
 	<h3><?php echo  $user_profile->displayName; ?></h3>
 	<hr>
 
-<?php
-// 	<h3>User Contacts </h3>
-	// display the user contacts 
-	//echo $userContacts = getUserContacts($twitter->getUserContacts());
-
-//	<hr>
-?>
-
 <?php 
 /** 
  * get Timelines
  */
 			$user_time_line = $twitter->api()->api('/statuses/home_timeline.json');
+	//		echo "<pre>" ;
+	//		print_r($user_time_line); exit;
 			$timelineHtml = formatTimeline($user_time_line);
 			echo $timelineHtml  ;
-			
 
 ?>	

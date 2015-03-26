@@ -26,8 +26,10 @@ return
 			"Facebook" => array ( 
 				"enabled" => true,
 				"keys"    => array (
-				 		"id" => "1534503190133665", 
-				 		"secret" => "c2ed70bd12e6fb1cc0fa93a389fbaa86" 
+//				 		"id" => "1534503190133665", 
+				 		"id" => "1554213044829346",  // zoowimama - Test1
+				 		//"secret" => "c2ed70bd12e6fb1cc0fa93a389fbaa86"  
+				 		"secret" => "8fd4cabe2de8bc79395a56a44fe831ae" // zoowimama - Test1
 
 				),
 				"scope"   => "read_stream,user_about_me,user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,
