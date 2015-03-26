@@ -233,7 +233,7 @@
 							      			<h4>'. $comment['message'].'</h4>
 							      			<p> Likes ('.$comment['like_count'].')</p>
 							      			<span id="'.$comment['id'].'_span"></span>
-							      			<input type"text" id="'.$comment['id'].'_comment"/>							      
+							      			<input type"text" id="'.$comment['id'].'_comment" onkeypress="handleCarriageReturns(event, \''.$comment['id'].'\')" />							      
 								        	<button type="button" class="btn btn-primary" onclick="postRepliesToComments(\''.$comment['id'].'\') ">Post</button>
 							      		</div>';
 														
@@ -264,23 +264,33 @@
 ?>		
 </div>
 <script type="text/javascript" >
-
-postRepliesToComments = function (id){
+/** 
+ * Code that handles the carriage key
+ */
+	function handleCarriageReturns(e, id) {
+	    if (e.keyCode == 13) {
+	    	postRepliesToComments(id) 
+	        return false;
+	    }
+	}
 	
-	var url = "index.php?r=fb/CurlPostTOProvder";
-	var message  = $("#"+id+"_comment").val();
-	var data = 'id='+ id  + '&message='+ message;
-
-	  $.ajax({
-	        type:"POST",
-	        cache:false,
-	        url:url,
-	        data:data,    // multiple data sent using ajax
-	        success: function (html) {
-		//		alert('posted successfully');
+	/**
+		Code that posts Comments to the facebook
+	*/
+	
+	postRepliesToComments = function (id){
+		var url = "index.php?r=fb/CurlPostTOProvder";
+		var message  = $("#"+id+"_comment").val();
+		var data = 'id='+ id  + '&message='+ message;
+		$.ajax({
+			type:"POST",
+			cache:false,
+			url:url,
+			data:data,    // multiple data sent using ajax
+			success: function (html) {
 				$("#"+id+"_comment").val('') ;
 				$("#"+id+"_span").html(message) ;
-	        }
-	      });
-};
+			}
+		});
+	};
 </script>
