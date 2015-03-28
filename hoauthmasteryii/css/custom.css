@@ -266,11 +266,11 @@ span.required {
 }
 .feed-list .top-list-head .media {
   position:relative;
-  width: 413px;
+  /*width: 413px;*/
   display: block;
-  height: 98px;
+  /*height: 98px;
   text-overflow: ellipsis;
-  overflow: hidden;
+  overflow: hidden;*/
 }
 .feed-list .top-list-head .media .media-left a {
   border-radius: 20px;
