@@ -127,6 +127,7 @@
 			require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
 			$hybridauth = new Hybrid_Auth( $config );
 
+
 			$fbAdapter = $hybridauth->authenticate( "facebook" );
 			$fbUserProfile = $fbAdapter->getUserProfile();
 			// UserId for Facebook account
@@ -157,6 +158,8 @@
 				
 				if(isset($feed['picture']))
 					$picture = $feed['picture'];
+				
+				$shares ='';	
 				if(isset($feed['shares']))
 					$shares = $feed['shares']['count'];
 				
@@ -168,9 +171,11 @@
 					$from = $feed['from']['name'];
 					$fromId = $feed['from']['id'];
 					$message = $feed['message'];
-					$likes = count($feed['likes']['data']);
+					if(isset($feed['likes']['data']))
+						$likes = count($feed['likes']['data']);
 					$link = count($feed['actions'][0]['link']);
-					$comments = $feed['comments']['data'];
+					if(isset($feed['comments']['data']))
+						$comments = $feed['comments']['data'];
 					
 					$post_created_time = '';
 //					if(isset($feed['created_time]']))
