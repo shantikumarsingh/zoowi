@@ -258,3 +258,33 @@ span.required {
 #content {
   min-height: 458px;
 }
+
+.feed-list .thumbnail {
+  display: inline-block;
+  padding:  .25rem;
+  width:  100%;
+}
+.feed-list .top-list-head .media {
+  position:relative;
+  width: 413px;
+  display: block;
+  height: 98px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.feed-list .top-list-head .media .media-left a {
+  border-radius: 20px;
+  background: #641616;
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+}
+.feed-list .top-list-head .media .media-left a img {
+  height: 42px;
+  width: 42px;
+}
+
+#page {
+  min-height: 525px;
+}

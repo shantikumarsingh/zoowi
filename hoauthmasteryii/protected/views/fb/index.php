@@ -186,21 +186,27 @@
 						
 					$timelineInnerData.='
 						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-							<a href="#" class="center-block panel panel-default" data-toggle="modal" data-target="#'.$id.'">
-						  		<div class="panel-body">
-							  		<div class="media">
-							  			<div class="media-left">
-							  				<img style="width32px;height:32px;" src="'.$personProfileImageData.'" /> 
-							  				<span aria-hidden="true">'.$from.'</span>
-							  				<span aria-hidden="true">'.$from.'</span>
-							  				<span aria-hidden="true"> '.$post_created_time.'</span>
-							  			</div>
-							  			<div class="media-body">
-							  				'.$message.'
-							  			</div>
-							  		</div>
-							  	</div>
-							</a>
+							<div data-toggle="modal" data-target="#'.$id.'" class="thumbnail">
+								<div class="top-list-head">
+									<div class="media">
+										<div class="media-left">
+											<a href="javascript:void(0);">
+												<img class="media-object" src="'.$personProfileImageData.'" />
+											</a>
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">'.$from.'</h4>
+											<ul class="list-inline">
+												<li><small class="text-muted">'.$from.'</small></li>
+												<li class="pull-right"><small class="text-muted">'.$post_created_time.'</small></li>
+											</ul>
+											<div class="">
+												'.$message.'
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					';
 					$timelineInnerData.='
