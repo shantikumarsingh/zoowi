@@ -28,10 +28,11 @@ return
 				"keys"    => array (
 //				 		"id" => "1534503190133665", 
 				 		"id" => "1554213044829346",  // zoowimama - Test1
-				 		//"secret" => "c2ed70bd12e6fb1cc0fa93a389fbaa86"  
+//				 		"secret" => "c2ed70bd12e6fb1cc0fa93a389fbaa86"  
 				 		"secret" => "8fd4cabe2de8bc79395a56a44fe831ae" // zoowimama - Test1
 
 				),
+				
 				"scope"   => "read_stream,user_about_me,user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,
 							  user_activities,user_birthday,user_education_history,user_events,user_friends,user_games_activity,user_groups,
 							  user_hometown,user_interests,user_likes,user_location,user_photos,user_relationship_details ,user_relationships,
