@@ -256,7 +256,7 @@ span.required {
 }
 
 #content {
-  min-height: 458px;
+  min-height: 478px;
 }
 
 .feed-list .thumbnail {
@@ -271,23 +271,55 @@ span.required {
   min-height: 98px;
   max-height: 98px;
   overflow: hidden;
+  cursor: pointer;
   /*height: 98px;
   text-overflow: ellipsis;
   overflow: hidden;*/
 }
-.feed-list .top-list-head .media .media-left a {
-  border-radius: 20px;
-  background: #641616;
+.feed-list .top-list-head .media .media-left a,
+.feed-list .modal-header .media .media-left a {
+  border-radius: 6px;
+  background: #FFFFFF;
+  border: 1px solid #fafafa;
   display: inline-block;
   width: 42px;
   height: 42px;
   overflow: hidden;
 }
-.feed-list .top-list-head .media .media-left a img {
+.feed-list .top-list-head .media .media-left a img,
+.feed-list .modal-header .media .media-left a img {
   height: 42px;
   width: 42px;
 }
+.feed-list .top-list-head .media .media-body .media-heading .fa-facebook-square,
+.feed-list .modal-content .fa-facebook-square {
+  color: #3D61A7;
+}
 
-#page {
-  min-height: 525px;
+
+.feed-list .modal-dialog {
+  margin: 0px;
+  right: -41.4% !important;
+  height: 100%;
+  width: 800px;
+  top: -2px;
+}
+
+.feed-list .modal-content {
+  border-radius: 0px;
+  min-height: 642px;
+}
+.feed-list .modal-content .close {
+  float: left;
+  position: absolute;
+  left: -34px;
+  background: #fff;
+  opacity: 1;
+  padding: 4px 10px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.feed-list .modal-body .media-body {
+  min-height: 547px;
+  overflow-y: auto;
 }
