@@ -114,12 +114,12 @@
 		try {
 
 			//echo CHtml::button(' POST ', array('submit' => array('fb/postPage'))); 
-			echo CHtml::link(' POST ',array('fb/postPage'),array('class'=>'link_on_fb'));
+			/*echo CHtml::link(' POST ',array('fb/postPage'),array('class'=>'link_on_fb'));
 			echo '<br />' ; 
 			echo '<br />' ; 
 			echo CHtml::link(' Update Status ',array('fb/updateStatusPage'),array('class'=>'link_on_fb')); 
 			echo '<br />' ; 
-			echo '<br />' ; 
+			echo '<br />' ; */
 
 			
 			
@@ -140,8 +140,10 @@
 //			exit;
 	?>
 	
-<img style="width: 32px; height: 32px;"  src = "<?php echo $fbUserProfile->photoURL;?>" width= "32" height="32"></img>	
-	<h3><?php echo  $fbUserProfile->displayName; ?></h3>
+	<div class="">
+		<img style="width: 32px; height: 32px;"  src = "<?php echo $fbUserProfile->photoURL;?>" />
+		<h3><?php echo  $fbUserProfile->displayName; ?></h3>
+	</div>
 	<div class="row feed-list">
 	<?php 
 
@@ -195,7 +197,7 @@
 											</a>
 										</div>
 										<div class="media-body">
-											<h4 class="media-heading">'.$from.'</h4>
+											<h4 class="media-heading">'.$from.'<small class="pull-right"><i class="fa fa-facebook-square fa-lg"></i></small></h4>
 											<ul class="list-inline">
 												<li><small class="text-muted">'.$from.'</small></li>
 												<li class="pull-right"><small class="text-muted">'.$post_created_time.'</small></li>
@@ -213,9 +215,25 @@
 						<div class="modal fade" id="'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 						  	<div class="modal-dialog">
 							    <div class="modal-content">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							      	<div class="modal-header">
-							        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							        	<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+							        	<div class="modal-title" id="myModalLabel">
+								        	<div class="media">
+												<div class="media-left">
+													<a href="javascript:void(0);">
+														<img class="media-object" src="'.$personProfileImageData.'" />
+													</a>
+												</div>
+												<div class="media-body">
+													<h4 class="media-heading">'.$from.'<small class="pull-right"><i class="fa fa-facebook-square fa-lg"></i></small></h4>
+													<ul class="list-inline">
+														<li><small class="text-muted">'.$from.'</small></li>
+														<li class="pull-right"><small class="text-muted">'.$post_created_time.'</small></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+
 							      	</div>
 							      	<div class="modal-body">
 							      		<ul class="media-list">
