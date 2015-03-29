@@ -1,5 +1,5 @@
 <?php
-
+	
 /**
  * 
  * This file list the facebook pages
@@ -133,21 +133,58 @@
 			// UserId for Facebook account
 			
 			$fbIdentifier = $fbUserProfile->identifier; 
+			$picture = $fbAdapter->api()->api($fbIdentifier.'?fields=cover');
+			
 			//echo "<br />" . $fbIdentifier  ;
 //			echo '<pre>' ;
 //			$profileImage = $fbAdapter->api()->api('/880000108713199/picture?redirect=0&height=200&width=200&type=normal');
 //			print_r($profileId);
 //			exit;
 	?>
-	
-	<div class="">
-		<img style="width: 32px; height: 32px;"  src = "<?php echo $fbUserProfile->photoURL;?>" />
-		<h3><?php echo  $fbUserProfile->displayName; ?></h3>
-	</div>
-	<div class="row feed-list">
-		<div class="columns">
-	
 	<?php 
+	//	$this->breadcrumbs=array(
+	//		'Facebook',
+	//	);
+	?>
+	<div class="row feed-list">
+		<div class="cover">
+			<div class="preview">
+				<img class="img-responsive" src="<?php echo $picture['cover']['source']; ?>" />
+			</div>
+			<div class="user">
+				<span class="avatar">
+					<img class="img-circle" src="<?php echo $fbUserProfile->photoURL;?>" />
+				</span>
+				<span class="lead"><?php echo  $fbUserProfile->displayName; ?></span>
+			</div>
+			<ul class="list-inline menu">
+				<li class="active"><a href="javascript:void(0);"><i class="fa fa-users"></i> Friends (234)</a></li>
+				<li><a href="javascript:void(0);"><i class="fa fa-users"></i> Groups (5)</a></li>
+				<li><a href="javascript:void(0);"><i class="fa fa-picture-o"></i> Photos (1320)</a></li>
+				<li class="pull-right" id="settings">
+					<ul class="list-inline">
+						<li class="active" id="grid-li">
+							<a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="Grid View" id="grid-view">
+								<i class="fa fa-th-large"></i>
+							</a>
+						</li>
+						<li id="list-li">
+							<a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="List View" id="list-view">
+								<i class="fa fa-list-ul"></i>
+							</a>
+						</li>
+						<li id="refresh-li">
+							<a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="Reload" id="grid-view">
+								<i class="fa fa-refresh"></i>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="columns" id="columns-id">
+	
+		<?php 
 
 			$access_token = $fbAdapter->getAccessToken();
 			//$timelineFeeds = $fbAdapter->api()->api('/me/home');

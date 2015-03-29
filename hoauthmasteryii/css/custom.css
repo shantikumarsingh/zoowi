@@ -69,7 +69,7 @@ footer {
 	position: relative;
 }
 img {
-	width: 100%;
+	/*width: 100%;*/
 	max-width: 100%;
 	height: auto;
 }
@@ -265,7 +265,18 @@ span.required {
   -webkit-column-fill: auto;
   -moz-column-count: 3;
   -moz-column-gap: 10px;
-  -moz-column-fill: auto;
+  -moz-column-fill: balance;
+  column-count: 3;
+  column-gap: 15px;
+  column-fill: auto;
+}
+.feed-list .columns-remove {
+  -webkit-column-count: 0;
+  -webkit-column-gap: 10px;
+  -webkit-column-fill: auto;
+  -moz-column-count: 3;
+  -moz-column-gap: 10px;
+  -moz-column-fill: balance;
   column-count: 3;
   column-gap: 15px;
   column-fill: auto;
@@ -315,10 +326,22 @@ span.required {
   height: 100%;
   width: 800px;
   top: 45px;*/
-}
+  }
 .feed-list .modal-body {
-  height: 579px;
-  overflow-y: auto;
+    height: 579px;
+    overflow-y: auto;
+}
+.feed-list .modal-body::-webkit-scrollbar {
+  width: 10px;
+}
+.feed-list .modal-body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+}
+.feed-list .modal-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: rgba(0, 0, 0, 0.27);
 }
 .feed-list .modal-content {
   border-radius: 0px;
@@ -355,4 +378,60 @@ span.required {
 }
 .feed-list .modal-body .media .media-body .well .media:last-child {
   border: none;
+}
+.cover .preview {
+  overflow: hidden;
+  background-color: #211f2a;
+}
+.cover .preview .img-responsive {
+    margin: 0 auto
+}
+
+@media (min-width: 768px) {
+  .cover .preview {
+    max-height: 200px;
+  }
+}
+.cover {
+  position: relative;
+  margin-bottom: 30px;
+  box-shadow: 0px 3px 5px #e2e2e2;
+}
+.cover .user {
+  position: absolute;
+  left: 3%;
+  bottom: 27px;
+  text-shadow: -1px -1px 2px #515151;
+}
+.cover .user .avatar {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  border: 3px solid #fff;
+  border-radius: 50%;
+}
+.cover .user .lead {
+  color: #FFFFFF;
+  font-size: 30px !important;
+}
+.cover .menu {
+  padding-left: 115px;
+  margin: 0;
+  height: 55px;
+  list-style: none;
+  background: #fff;
+}
+.cover ul.menu li a {
+  height: 55px;
+  line-height: 53px;
+  margin-right: 5px;
+  color: #868686;
+  font-size: 14px;
+  padding: 18px 0;
+}
+.cover ul.menu li.active a,
+.cover ul.menu li ul li.active a,
+.cover ul.menu li a:hover,
+.cover ul.menu li ul li.active a:hover {
+  color: #333333;
 }

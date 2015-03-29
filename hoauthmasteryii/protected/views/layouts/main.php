@@ -61,15 +61,19 @@
 			</div>
 		</nav>
 
-		<div class="container-fluid" id="page">
+		<div class="container" id="page">
 			<a href="#" class="fa fa-bars link-menu jsc-sidebar-trigger"></a>
 
+			<!-- breadcrumbs -->
 			<?php if(isset($this->breadcrumbs)):?>
 				<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 					'links'=>$this->breadcrumbs,
-				)); ?><!-- breadcrumbs -->
+					'htmlOptions'=>array('class' => 'breadcrumb')
+				)); ?>
 			<?php endif?>
 
+
+			<!-- Content body -->
 			<?php echo $content; ?>
 
 		</div>
@@ -110,13 +114,14 @@
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/grid.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/sidebar.js"></script>
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/custom.js"></script>
 		<!--<script src="<?php //echo Yii::app()->request->baseUrl; ?>/js/custom.js"></script>-->
 		<script>
 			$('#jsi-nav').sidebar({
 				trigger: '.jsc-sidebar-trigger',
 				scrollbarDisplay: true,
-				pullCb: function () { console.log('pull'); },
-				pushCb: function () { console.log('push'); }
+				//pullCb: function () { console.log('pull'); },
+				//pushCb: function () { console.log('push'); }
 			});
 
 			$('#api-push').on('click', function (e) {
@@ -127,13 +132,13 @@
 				e.preventDefault();
 				$('#jsi-nav').data('sidebar').pull();
 			});
-			$('#pinBoot').pinterest_grid({
+			/*$('#pinBoot').pinterest_grid({
 				no_columns: 3,
 				padding_x: 10,
 				padding_y: 10,
 				margin_bottom: 50,
 				single_column_breakpoint: 700
-			});
+			});*/
 
 			$('body').append('<button id="toTop" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Back to top"><i class="fa fa-chevron-up"></i></button>');
 		    	$(window).scroll(function () {

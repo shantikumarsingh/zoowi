@@ -5,7 +5,7 @@
 	} else
 		$this->beginContent('//layouts/guestmain');
  ?>
-<div id="content">
+<div id="content" class="container-fluid">
 	<?php echo $content; ?>
 </div><!-- content -->
 <?php
