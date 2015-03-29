@@ -288,17 +288,17 @@ span.required {
   transition: all .2s ease;
 }
 .feed-list .top-list-head .media .media-left a,
-.feed-list .modal-header .media .media-left a {
+.feed-list .modal-header .media .media-left a,
+.feed-list .modal-body .media .media-body .well .media-left a {
   border-radius: 6px;
-  background: #FFFFFF;
-  border: 1px solid #fafafa;
   display: inline-block;
   width: 42px;
   height: 42px;
   overflow: hidden;
 }
 .feed-list .top-list-head .media .media-left a img,
-.feed-list .modal-header .media .media-left a img {
+.feed-list .modal-header .media .media-left a img,
+.feed-list .modal-body .media .media-body .well .media-left a img {
   height: 42px;
   width: 42px;
 }
@@ -309,13 +309,17 @@ span.required {
 
 
 .feed-list .modal-dialog {
-  /*margin: 0px;
+  margin: 0px auto 30px;
+  /*
   right: -39.8% !important;
   height: 100%;
   width: 800px;
   top: 45px;*/
 }
-
+.feed-list .modal-body {
+  height: 579px;
+  overflow-y: auto;
+}
 .feed-list .modal-content {
   border-radius: 0px;
   min-height: 642px;
@@ -333,4 +337,22 @@ span.required {
 .feed-list .modal-body .media-body {
   min-height: 547px;
   overflow-y: auto;
+}
+
+.feed-list .modal-body .media .media-body .well {
+  padding: 10px;
+  margin-top: 10px;
+}
+.feed-list .modal-body .media .media-body .well .media-body .form-inline .form-group {
+  display: block;
+}
+.feed-list .modal-body .media .media-body .well .media-body .form-inline .form-group input {
+  width: 92%;
+}
+.feed-list .modal-body .media .media-body .well .media {
+  border-bottom: 1px solid #D0CECE;
+  padding-bottom: 15px;
+}
+.feed-list .modal-body .media .media-body .well .media:last-child {
+  border: none;
 }

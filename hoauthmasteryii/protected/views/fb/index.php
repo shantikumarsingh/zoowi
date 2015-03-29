@@ -238,48 +238,60 @@
 
 							      	</div>
 							      	<div class="modal-body">
-							      		<ul class="media-list">
-									    	<li class="media">
+							      		<div class="media-list">
+									    	<div class="media">
 										    	<div class="media-left">
 													<img src="'.$picture.'" />
 										    	</div>
 										    	<div class="media-body">
-													'.$message.'
-													<p>
-														Likes ('.$likes.') | Shares ('.$shares.')
-													</p>
-									    			<div class="media">
-									';
+													<p>'.$message.'</p>
+													<ul class="list-inline">
+														<li><a href="javascript:vodi(0);"><small><i class="fa fa-thumbs-o-up"></i> Likes ('.$likes.')</small></a></li>
+														<li><a href="javascript:vodi(0);"><small><i class="fa fa-share"></i> Shares ('.$shares.')</small></a></li>
+													</ul>
+									    			
+									    			<div class="well">';
 								if(isset($comments))
 								foreach ($comments as $comment){
 									//$profileImage = $fbAdapter->api()->api('/'.$comment['from']['id'].'/picture?redirect=0&height=32&width=32&type=normal');
-									$profileImage ['data']['url']= './images/profileuser.png';
-									$timelineInnerData.='
-								    	<div class="media-left">
-								    		<!-- Need to replace the image src -->
-								    		<img style= "width:px;height32px;" id="'.$comment['from']['id']. '" src="'.$profileImage ['data']['url'].'" />
-								    		<span>'.$comment['from']['name']. '</span>
-								    	</div>
-						    			<div class="media-body">
-							      			<h4>'. $comment['message'].'</h4>
-							      			<p> Likes ('.$comment['like_count'].')</p>
-							      			<span id="'.$comment['id'].'_span"></span>
-							      			<input type"text" id="'.$comment['id'].'_comment" onkeypress="handleCarriageReturns(event, \''.$comment['id'].'\')" />							      
-								        	<button type="button" class="btn btn-primary" onclick="postRepliesToComments(\''.$comment['id'].'\') ">Post</button>
-							      		</div>';
+									$profileImage ['data']['url']= './images/default_user.png';
+									$timelineInnerData.=' <div class="media">
+													    	<div class="media-left">
+														    	<a href="javascript:void(0);">
+																	<img class="media-object" id="'.$comment['from']['id']. '" src="'.$profileImage ['data']['url'].'" />
+																</a>
+													    	</div>
+											    			<div class="media-body">
+													    		<h4 class="media-heading">'.$comment['from']['name']. '</h4>
+												      			<ul class="list-inline">
+												      				<li><a href="javascript:void(0);"><small><i class="fa fa-thumbs-o-up"></i> Likes ('.$comment['like_count'].')</small></a></li>
+												      				<li id="'.$comment['id'].'_span"></li>
+												      			</ul>
+												      			<p>'. $comment['message'].'</p>
+												      			<form class="form-inline">
+												      				<div class="form-group">
+												      					<img style="width:32px;height:32px;" src="'.$personProfileImageData.'" />
+												      					<input type"text" placeholder="Write a comment here ..." class="form-control" id="'.$comment['id'].'_comment" onkeypress="handleCarriageReturns(event, \''.$comment['id'].'\')" />
+												      				</div>
+												      				<!--<div class="form-group">
+													        			<button type="button" class="btn btn-primary" onclick="postRepliesToComments(\''.$comment['id'].'\') ">Post</button>
+													        		</div>-->
+													        	</form>
+												      		</div>
+												      	</div>';
 														
 								}
 
 							//footer data
-						$timelineInnerData .='
+						$timelineInnerData .='			
 									    			</div>
 										      	</div>
-									    	</li>
-							      		</ul>
-								</div>
-						      	<div class="modal-footer">
+									    	</div>
+							      		</div>
+									</div>
+						      	<!-- <div class="modal-footer">
 									
-						      	</div>
+						      	</div> -->
 						    </div>
 						  </div>
 						</div>';
