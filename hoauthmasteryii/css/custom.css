@@ -259,22 +259,33 @@ span.required {
   min-height: 478px;
 }
 
-.feed-list .thumbnail {
-  display: inline-block;
-  padding:  .25rem;
-  width:  100%;
+.feed-list .columns {
+  -webkit-column-count: 3;
+  -webkit-column-gap: 10px;
+  -webkit-column-fill: auto;
+  -moz-column-count: 3;
+  -moz-column-gap: 10px;
+  -moz-column-fill: auto;
+  column-count: 3;
+  column-gap: 15px;
+  column-fill: auto;
 }
-.feed-list .top-list-head .media {
-  position:relative;
-  /*width: 413px;*/
-  display: block;
-  min-height: 98px;
-  max-height: 98px;
-  overflow: hidden;
-  cursor: pointer;
-  /*height: 98px;
-  text-overflow: ellipsis;
-  overflow: hidden;*/
+.feed-list .pin .thumbnail {
+  margin-bottom: 10px;
+}
+.feed-list .pin {
+  display: inline-block;
+  background: #FEFEFE;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;
+  background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+  opacity: 1;
+  
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
 }
 .feed-list .top-list-head .media .media-left a,
 .feed-list .modal-header .media .media-left a {
@@ -298,11 +309,11 @@ span.required {
 
 
 .feed-list .modal-dialog {
-  margin: 0px;
-  right: -41.4% !important;
+  /*margin: 0px;
+  right: -39.8% !important;
   height: 100%;
   width: 800px;
-  top: -2px;
+  top: 45px;*/
 }
 
 .feed-list .modal-content {

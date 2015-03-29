@@ -145,6 +145,8 @@
 		<h3><?php echo  $fbUserProfile->displayName; ?></h3>
 	</div>
 	<div class="row feed-list">
+		<div class="columns">
+	
 	<?php 
 
 			$access_token = $fbAdapter->getAccessToken();
@@ -187,7 +189,7 @@
 					$personProfileImageData = $personProfileImage ['data']['url'];
 						
 					$timelineInnerData.='
-						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="pin">
 							<div data-toggle="modal" data-target="#'.$id.'" class="thumbnail">
 								<div class="top-list-head">
 									<div class="media">
@@ -291,6 +293,7 @@
 		}
 // 		
 ?>		
+	</div>
 </div>
 <script type="text/javascript" >
 /** 
