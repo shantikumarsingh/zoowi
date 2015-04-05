@@ -110,19 +110,33 @@
 		Adding Javascript - place them as required
 		-->
 <?php
+ $baseUrl = Yii::app()->baseUrl; 
+ $cs = Yii::app()->getClientScript();
+ $cs->registerScriptFile($baseUrl.'/js/jquery.min.js');
+ $cs->registerScriptFile($baseUrl.'/js/modernizr.js');
+ $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
+ $cs->registerScriptFile($baseUrl.'/js/grid.js');
+ $cs->registerScriptFile($baseUrl.'/js/sidebar.js');
+ $cs->registerScriptFile($baseUrl.'/js/custom.js');
 
+/* 
  $baseUrl = Yii::app()->baseUrl; 
  $cs = Yii::app()->getClientScript();
  $cs->registerScriptFile($baseUrl.'/js/jquery.min.js',CClientScript::POS_END);
-
+ $cs->registerScriptFile($baseUrl.'/js/modernizr.js',CClientScript::POS_END);
+ $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js',CClientScript::POS_END);
+ $cs->registerScriptFile($baseUrl.'/js/grid.js',CClientScript::POS_END);
+ $cs->registerScriptFile($baseUrl.'/js/sidebar.js',CClientScript::POS_END);
+ $cs->registerScriptFile($baseUrl.'/js/custom.js',CClientScript::POS_END);
+*/
 ?>
 		
-		<!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script> -->
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/modernizr.js"></script>
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/grid.js"></script>
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/sidebar.js"></script>
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/custom.js"></script>
+		<!--<script src="<?php //echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script> 
+		<script src="<?php //echo Yii::app()->request->baseUrl; ?>/js/modernizr.js"></script>
+		<script src="<?php //echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
+		<script src="<?php //echo Yii::app()->request->baseUrl; ?>/js/grid.js"></script>
+		<script src="<?php //echo Yii::app()->request->baseUrl; ?>/js/sidebar.js"></script>
+		<script src="<?php //echo Yii::app()->request->baseUrl; ?>/js/custom.js"></script>
 		<!--<script src="<?php //echo Yii::app()->request->baseUrl; ?>/js/custom.js"></script>-->
 		<script>
 			$('#jsi-nav').sidebar({
