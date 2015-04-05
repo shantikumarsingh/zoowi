@@ -1,5 +1,5 @@
 <?php
-	
+
 /**
  * 
  * This file list the facebook pages
@@ -49,77 +49,58 @@
 	}
 	
 	
-
-		// format message
-	function format_string( $string )
-	{
-		// url to link
-		$string = preg_replace( '/((?:http|https|ftp):\/\/(?:[A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?[^\s\"\']+)/i','<a href="$1" rel="nofollow" target="blank">$1</a>', $string ) ;
-
-	// some stuff for twitter, just to demonstrate ...
-
-		// hashtag to link
-		$string = preg_replace('/(^|\s)#(\w*[a-zA-Z_]+\w*)/', '\1<a href="http://twitter.com/search/\2" rel="nofollow" target="blank">#\2</a>', $string );
+	function formatHomeTimeLineFeeds ($timelineFeeds){
+		print_r($timelineFeeds);
 		
-		// @ to link
-		$string = preg_replace('/(^|\s)@(\w*[a-zA-Z_]+\w*)/', '\1<a href="http://twitter.com/\2" rel="nofollow" target="blank">@\2</a>', $string );
+				$timelineFeeds = $timelineFeeds['data'];
+		$timelineInnerData='' ;
+		foreach ($timelineFeeds  as $feed) {
 
-		return $string;
-	}
-
-	/**
-	 * 
-	 * Facebook Functions 
-	 * @param $user_activity
-	 */
-	
-	function displayUserTimeLine($user_activity){
-		//echo "<pre>";
-		print_r($user_activity);
-		exit;
-		$timeline = '<div>' ;	
-		foreach ($user_activity as $item) {
-			$timeline .= '<a href="'.$item->user->profileURL.'">';
-			if( $item->user->photoURL )
-				$timeline .='<img src="'.$item->user->photoURL.'" border="0" width="48" height="48">';
-			else 
-				$timeline .='<img src="./images/profileuser.png" border="0" width="48" height="48">';
-			$timeline .= '<span><a href="'.$item->user->profileURL.'"><b>'.$item->user->displayName.'</b></a> </span>';	
-			$timeline .= '<span>'.format_string( $item->text ).'</span>';	
-			$timeline .= '<small>'.timestamp_to_relative_time( $item->date ).'</small>';	
-			$timeline .= '</a><br /> ';	
+			$id = $feed['id'];
+			if(isset($feed['message']))
+				$message = $feed['message'];
+			if(isset($feed['story']))
+				$story = $feed['story'];
+			if(isset($feed['name']))
+				$profileName = $feed['name'];
+			
+			if(isset($feed['picture']))
+			$profilePicture = $feed['picture'];
+			
+			if(isset($feed['actions']))
+				$postActions = $feed['actions'];
+			if(isset($feed['type']))
+			$postType = $feed['type'];
+			if(isset($feed['object_id']))
+			$objectId = $feed['object_id'];
+			$createdTime = $feed['created_time'];
+		
+			if(isset($feed['comments'])){
+				$comments = $feed['comments'];
+				/*
+				foreach ($comments as $comment){
+					if(isset($comment['from'])){
+						$commentFromId = $comment['from']['id'];
+						$commentFromName = $comment['from']['name'];
+					}
+					
+					
+					if(isset($comment['message'])){
+						$commentMessage = $comment['message'];
+						$commentCreatedTime = $comment['created_time'];
+						$commentLikeCount = $comment['like_count'];
+						
+					}$timelineInnerData .=' here ';
+					
+				}
+				*/	
+			} //if ends here
 			
 		}
-		$timeline .= '</div>' ;	
-		return $timeline;
-	}
-	
-	function getPostId($id){
-		$ids = explode("_" , $id) ;
-		return $ids[1];
-	}
-
-	function formatUserComments($comments, $link){
-		
-		$feedData = '<a href="'.$link.'"> <div>';
-		foreach ($comments as $comment){
-			$feedData .= '<span> '.$comment['message'].'</span>';
-			//$feedData .= '<span> Count '.$comment['like_count'].'</span><br />';
-		} 
-		$feedData .= '</div> </a>';
-		return $feedData;
 	}
 	
 	
 		try {
-
-			//echo CHtml::button(' POST ', array('submit' => array('fb/postPage'))); 
-			/*echo CHtml::link(' POST ',array('fb/postPage'),array('class'=>'link_on_fb'));
-			echo '<br />' ; 
-			echo '<br />' ; 
-			echo CHtml::link(' Update Status ',array('fb/updateStatusPage'),array('class'=>'link_on_fb')); 
-			echo '<br />' ; 
-			echo '<br />' ; */
 
 			
 			
@@ -133,66 +114,30 @@
 			// UserId for Facebook account
 			
 			$fbIdentifier = $fbUserProfile->identifier; 
-			$picture = $fbAdapter->api()->api($fbIdentifier.'?fields=cover');
-			
-			//echo "<br />" . $fbIdentifier  ;
-//			echo '<pre>' ;
-//			$profileImage = $fbAdapter->api()->api('/880000108713199/picture?redirect=0&height=200&width=200&type=normal');
-//			print_r($profileId);
-//			exit;
 	?>
-	<?php 
-	//	$this->breadcrumbs=array(
-	//		'Facebook',
-	//	);
-	?>
-	<div class="row feed-list">
-		<div class="cover">
-			<div class="preview">
-				<img class="img-responsive" src="<?php echo $picture['cover']['source']; ?>" />
-			</div>
-			<div class="user">
-				<span class="avatar">
-					<img class="img-circle" src="<?php echo $fbUserProfile->photoURL;?>" />
-				</span>
-				<span class="lead"><?php echo  $fbUserProfile->displayName; ?></span>
-			</div>
-			<ul class="list-inline menu">
-				<li class="active"><a href="javascript:void(0);"><i class="fa fa-users"></i> Friends (234)</a></li>
-				<li><a href="javascript:void(0);"><i class="fa fa-users"></i> Groups (5)</a></li>
-				<li><a href="javascript:void(0);"><i class="fa fa-picture-o"></i> Photos (1320)</a></li>
-				<li class="pull-right" id="settings">
-					<ul class="list-inline">
-						<li class="active" id="grid-li">
-							<a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="Grid View" id="grid-view">
-								<i class="fa fa-th-large"></i>
-							</a>
-						</li>
-						<li id="list-li">
-							<a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="List View" id="list-view">
-								<i class="fa fa-list-ul"></i>
-							</a>
-						</li>
-						<li id="refresh-li">
-							<a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="Reload" id="grid-view">
-								<i class="fa fa-refresh"></i>
-							</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-		<div class="columns" id="columns-id">
 	
-		<?php 
+	<div class="">
+		<img style="width: 32px; height: 32px;"  src = "<?php echo $fbUserProfile->photoURL;?>" />
+		<h3><?php echo  $fbUserProfile->displayName; ?></h3>
+	</div>
+	<div class="row feed-list">
+		<div class="">
+	
+	<?php 
 
 			$access_token = $fbAdapter->getAccessToken();
-			//$timelineFeeds = $fbAdapter->api()->api('/me/home');
-			$timelineFeeds = $fbAdapter->api()->api('/'.$fbIdentifier.'?fields=home.filter(others){message,id,from,picture,actions,shares,likes,comments,photos}&limit=50');
+			$homeTimelineFeeds = $fbAdapter->api()->api($fbIdentifier.'/home');
+			echo "<pre>" ;
+			//print_r($homeTimelineFeeds);
+			//$timelineInnerData='';
+			formatHomeTimeLineFeeds ($homeTimelineFeeds ) ; 
+			
+			
+			/*
+			$timelineFeeds = $fbAdapter->api()->api('/'.$fbIdentifier.'?fields=home.filter(others){message,id,from,picture,actions,shares,likes,comments,photos}');
 			$timelineInnerData='';
-//			echo "<pre>" ;
-//	print_r($timelineFeeds);exit;
 			$feeds = $timelineFeeds['home']['data'];
+			
 			foreach ($feeds as $key => $feed){
 				
 				//error_log(' Key ' . $key );
@@ -305,7 +250,7 @@
 												      				<li id="'.$comment['id'].'_span"></li>
 												      			</ul>
 												      			<p>'. $comment['message'].'</p>
-												      			<div class="form-inline">
+												      			<form class="form-inline">
 												      				<div class="form-group">
 												      					<img style="width:32px;height:32px;" src="'.$personProfileImageData.'" />
 												      					<input type"text" placeholder="Write a comment here ..." class="form-control" id="'.$comment['id'].'_comment" onkeypress="handleCarriageReturns(event, \''.$comment['id'].'\')" />
@@ -313,7 +258,7 @@
 												      				<!--<div class="form-group">
 													        			<button type="button" class="btn btn-primary" onclick="postRepliesToComments(\''.$comment['id'].'\') ">Post</button>
 													        		</div>-->
-													        	</div>
+													        	</form>
 												      		</div>
 												      	</div>';
 														
@@ -335,8 +280,8 @@
 					
 				}
 			}
-		echo $timelineInnerData ;	
-			
+	//	echo $timelineInnerData ;	
+			*/
 		} catch (Exception $e){
 			echo $e->getMessage();
 		}
@@ -360,7 +305,6 @@
 	*/
 	
 	postRepliesToComments = function (id){
-		
 		var url = "index.php?r=fb/CurlPostTOProvder";
 		var message  = $("#"+id+"_comment").val();
 		var data = 'id='+ id  + '&message='+ message;

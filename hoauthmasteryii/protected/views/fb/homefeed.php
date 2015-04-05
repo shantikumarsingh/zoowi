@@ -188,10 +188,17 @@
 
 			$access_token = $fbAdapter->getAccessToken();
 			//$timelineFeeds = $fbAdapter->api()->api('/me/home');
-			$timelineFeeds = $fbAdapter->api()->api('/'.$fbIdentifier.'?fields=home.filter(others){message,id,from,picture,actions,shares,likes,comments,photos}&limit=50');
+			//$timelineFeeds = $fbAdapter->api()->api('/'.$fbIdentifier.'?fields=home.filter(others){message,id,from,picture,actions,shares,likes,comments,photos}&limit=50');
+			$timelineFeeds = $fbAdapter->api()->api('/me/taggable_friends'); // working here
+//			$timelineFeeds = $fbAdapter->api()->api('/1403484586624470/groups'); // working groups
+//			$timelineFeeds = $fbAdapter->api()->api('/1403484586624470/albums?fields=photos&access_token='.$access_token['access_token']); //
+
+
+//			$timelineFeeds = $fbAdapter->api()->api('/me/invitable_friends '); // can be used only for gaming apps
+			echo "<pre>" ;
+			print_r($timelineFeeds);exit;
+
 			$timelineInnerData='';
-//			echo "<pre>" ;
-//	print_r($timelineFeeds);exit;
 			$feeds = $timelineFeeds['home']['data'];
 			foreach ($feeds as $key => $feed){
 				
@@ -360,7 +367,7 @@
 	*/
 	
 	postRepliesToComments = function (id){
-		
+		alert(' here ' + id);
 		var url = "index.php?r=fb/CurlPostTOProvder";
 		var message  = $("#"+id+"_comment").val();
 		var data = 'id='+ id  + '&message='+ message;

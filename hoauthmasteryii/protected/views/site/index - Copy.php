@@ -76,7 +76,7 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name;
-//$this->widget('ext.hoauth.widgets.HOAuth');
+$this->widget('ext.hoauth.widgets.HOAuth');
 
 function shuffle_assoc($list) { 
 	if (!is_array($list)) return ;
@@ -204,6 +204,7 @@ function shuffle_assoc($list) {
 		 * $user_time_line = $twitter->api()->api('/statuses/mentions_timeline.json');
 		 */
 		$user_time_line = $twitter->api()->api('/statuses/user_timeline.json');
+
 		
 
 		foreach ($user_time_line as $key=> $timeLine) {
@@ -223,7 +224,7 @@ function shuffle_assoc($list) {
 			);
 			
 		}
-//		$currentFeed = shuffle_assoc($currentFeed) ;
+		$currentFeed = shuffle_assoc($currentFeed) ;
 		return $currentFeed;
 	}
 
@@ -233,6 +234,7 @@ function shuffle_assoc($list) {
  * @param $messagePost
  */
 	function formatFbMessage($messagePost){
+	
 		$html = '
 			<div type="button" class="row" data-toggle="modal" data-target="#'.$messagePost['id'].'">
 			  '.$messagePost['message'].'
@@ -305,27 +307,15 @@ function shuffle_assoc($list) {
  * 
  */
 	function formatTwitterMessage($messagePost){
-
-	//		echo '<pre>';
-	//		print_r($messagePost);
-	//		return ;
-	
 		$html ='';
 		if(isset($messagePost['message'])) {
-			$personProfileImageData = $messagePost['profileImageUrl']; 
-			$personProfileName = $messagePost['name']; 
 			$html = '
 				<div class="panel panel-default">
-					<div class="panel-body">
-					<div class="media-left">
-		  				<img style="width:32px;height:32px;"  src="'.$personProfileImageData.'" /> 
-		  				<span aria-hidden="true">'.$personProfileName.'</span>
-		  			</div>
-						<div type="button" class="row" data-toggle="modal" data-target="#'.$messagePost['id'].'">
-						
-						  '.$messagePost['message'].'
-						</div>
-					</div>
+				<div class="panel-body">
+				<div type="button" class="row" data-toggle="modal" data-target="#'.$messagePost['id'].'">
+				  '.$messagePost['message'].'
+				</div>
+				</div>
 				</div>
 
 					<div class="modal fade" id="'.$messagePost['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -394,11 +384,12 @@ function htmlizeTwitterData($twitterPost){
 	$finalResult = shuffle_assoc($finalResult) ; 
 	//print_r($finalResult); exit;
 	foreach( $finalResult as $post){
+		
 		/**
 		 * formats the Post and displays as plain HTML
 		 */
 		if($post['provider'] == 'facebook'){
-			echo htmlizeFbData($post);
+			//htmlizeFbData($post);
 		}
 		if($post['provider'] == 'twitter'){
 			echo htmlizeTwitterData($post);

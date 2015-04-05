@@ -181,7 +181,6 @@ class FbController extends Controller
 	
 	public function actionShareWithProvider(){
 		
-		
 		$config =  './protected/config/hoauth.php';
 		require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
 		$hybridauth = new Hybrid_Auth( $config );
@@ -192,8 +191,81 @@ class FbController extends Controller
 		$sharePost= $fbAdapter->api()->api('/'.$fbIdentifier.'/links/1463400223890245_1626350464261886?link='.$linkUrl.'&message='.$message );
 		print_r($sharePost);
 		echo "The post has been shared";
-		
-		
 	}
 	
+	/**
+	 * Display the home feeds
+	 */
+	public function actionHomeFeed(){
+
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('homefeed'); 
+	}
+	/**
+	 * Display the home feeds
+	 */
+	public function actionUserPhotos(){
+
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('photos'); 
+	}
+	/**
+	 * 
+	 * Display the friendsList
+	 */
+	public function actionUserFriends(){
+
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('friends'); 
+	}
+	
+	/**
+	 * 
+	 * Display the friendsList
+	 */
+	public function actionUserGroups(){
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('groups'); 
+	}
+
+	/**
+	 * 
+	 * gets all unread Notifications
+	 */
+	public function actionMyUnreadNotifications(){
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('notifications');
+	}
+	/**
+	 * 
+	 * Display the timeline of the user
+	 */
+	public function actionUserTimeline(){
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('timeline');
+	}
+	/**
+	 * 
+	 * User Likes 
+	 */
+	public function actionPostUserLikes(){
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$config =  './protected/config/hoauth.php';
+		require_once( "./protected/extensions/hoauth/hybridauth/Hybrid/Auth.php" );
+		$hybridauth = new Hybrid_Auth( $config );
+		$fbAdapter = $hybridauth->authenticate( "facebook" );
+		$fbIdentifier = '1403484586624470';
+		$sharePost= $fbAdapter->api()->api('/1606073576304722_1624996987745714/likes');
+		print_r($sharePost);
+		echo "The post has been shared";
+			
+		//$this->render('timeline');
+	}
 }

@@ -101,8 +101,6 @@ class TwitterController extends Controller
 		    
 		    ));
 **/		    
-		
-		
 	}
 	
 	/**
@@ -112,4 +110,37 @@ class TwitterController extends Controller
 	public function actionRetweetStatus(){
 		
 	}
+	
+	public function actionMyFollower(){
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('myfollowers');	
+	}
+	
+	public function actionMyMentions(){
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('mymentions');	
+	}
+
+	/**
+	 * Whom to follow
+	 * Enter description here ...
+	 */
+	public function actionUserSuggestions(){
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('suggestions');	
+	}
+
+	/**
+	 * List 
+	 * Enter description here ...
+	 */
+	public function actionTwitterUserList(){
+		if(Yii::app()->user->isGuest)
+			Yii::app()->user->loginRequired();
+		$this->render('twitterlist');	
+	}
+	
 }

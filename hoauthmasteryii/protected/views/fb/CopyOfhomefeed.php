@@ -1,5 +1,5 @@
 <?php
-	
+
 /**
  * 
  * This file list the facebook pages
@@ -49,77 +49,152 @@
 	}
 	
 	
-
-		// format message
-	function format_string( $string )
-	{
-		// url to link
-		$string = preg_replace( '/((?:http|https|ftp):\/\/(?:[A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?[^\s\"\']+)/i','<a href="$1" rel="nofollow" target="blank">$1</a>', $string ) ;
-
-	// some stuff for twitter, just to demonstrate ...
-
-		// hashtag to link
-		$string = preg_replace('/(^|\s)#(\w*[a-zA-Z_]+\w*)/', '\1<a href="http://twitter.com/search/\2" rel="nofollow" target="blank">#\2</a>', $string );
+	function formatHomeTimeLineFeeds ($timelineFeeds){
+/*		echo "<pre>" ;
+		print_r($timelineFeeds);
+		return;*/
 		
-		// @ to link
-		$string = preg_replace('/(^|\s)@(\w*[a-zA-Z_]+\w*)/', '\1<a href="http://twitter.com/\2" rel="nofollow" target="blank">@\2</a>', $string );
+				$timelineFeeds = $timelineFeeds['data'];
+		$timelineInnerData='' ;
+		foreach ($timelineFeeds  as $feed) {
 
-		return $string;
-	}
+			$likes='';
+			$shares='';
+			$id = $feed['id'];
+			$message = '';
+			if(isset($feed['message']))
+				$message = $feed['message'];
+			if(isset($feed['story'])){
+				$story = $feed['story'];
+				if($message == '')
+					$message = $story;
+			}	
+			$from = '';	
+			if(isset($feed['name']))
+				$from = $feed['name'];
+			
+			if(isset($feed['picture']))
+			$personProfileImageData = $feed['picture'];
+			
+			if(isset($feed['actions']))
+				$postActions = $feed['actions'];
+			if(isset($feed['type']))
+			$postType = $feed['type'];
+			if(isset($feed['object_id']))
+			$objectId = $feed['object_id'];
+			$post_created_time = $feed['created_time'];
+				$timelineInnerData.='
+						<div class="pin">
+							<div data-toggle="modal" data-target="#'.$id.'" class="thumbnail">
+								<div class="top-list-head">
+									<div class="media">
+										<div class="media-left">
+											<a href="javascript:void(0);">
+												<img class="media-object" src="'.$personProfileImageData.'" />
+											</a>
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">'.$from.'<small class="pull-right"><i class="fa fa-facebook-square fa-lg"></i></small></h4>
+											<ul class="list-inline">
+												<li><small class="text-muted">'.$from.'</small></li>
+												<li class="pull-right"><small class="text-muted">'.$post_created_time.'</small></li>
+											</ul>
+											<div class="">
+												'.$message.'
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					';
+	$timelineInnerData.='
+						<div class="modal fade" id="'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+						  	<div class="modal-dialog">
+							    <div class="modal-content">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							      	<div class="modal-header">
+							        	<div class="modal-title" id="myModalLabel">
+								        	<div class="media">
+												<div class="media-left">
+													<a href="javascript:void(0);">
+														<img class="media-object" src="'.$personProfileImageData.'" />
+													</a>
+												</div>
+												<div class="media-body">
+													<h4 class="media-heading">'.$from.'<small class="pull-right"><i class="fa fa-facebook-square fa-lg"></i></small></h4>
+													<ul class="list-inline">
+														<li><small class="text-muted">'.$from.'</small></li>
+														<li class="pull-right"><small class="text-muted">'.$post_created_time.'</small></li>
+													</ul>
+												</div>
+											</div>
+										</div>
 
-	/**
-	 * 
-	 * Facebook Functions 
-	 * @param $user_activity
-	 */
+							      	</div>
+							      	<div class="modal-body">
+							      		<div class="media-list">
+									    	<div class="media">
+										    	<div class="media-left">
+													<img src="'.$personProfileImageData.'" />
+										    	</div>
+										    	<div class="media-body">
+													<p>'.$message.'</p>
+													<ul class="list-inline">
+														<li><a href="javascript:vodi(0);"><small><i class="fa fa-thumbs-o-up"></i> Likes ('.$likes.')</small></a></li>
+														<li><a href="javascript:vodi(0);"><small><i class="fa fa-share"></i> Shares ('.$shares.')</small></a></li>
+													</ul>
+									    			
+									    			<div class="well">';
+
+				if(isset($feed['comments'])){
+					$timelineInnerData.='hello	';
+				$comments = $feed['comments'];
+				
+				foreach ($comments as $comment){
+					if(isset($comment['from'])){
+						$commentFromId = $comment['from']['id'];
+						$commentFromName = $comment['from']['name'];
+					}
+					
+					
+					if(isset($comment['message'])){
+						$commentMessage = $comment['message'];
+						$commentCreatedTime = $comment['created_time'];
+						$commentLikeCount = $comment['like_count'];
+						
+					}$timelineInnerData .=' here ';
+					
+				}
+				
+		
+			} //if ends here
 	
-	function displayUserTimeLine($user_activity){
-		//echo "<pre>";
-		print_r($user_activity);
-		exit;
-		$timeline = '<div>' ;	
-		foreach ($user_activity as $item) {
-			$timeline .= '<a href="'.$item->user->profileURL.'">';
-			if( $item->user->photoURL )
-				$timeline .='<img src="'.$item->user->photoURL.'" border="0" width="48" height="48">';
-			else 
-				$timeline .='<img src="./images/profileuser.png" border="0" width="48" height="48">';
-			$timeline .= '<span><a href="'.$item->user->profileURL.'"><b>'.$item->user->displayName.'</b></a> </span>';	
-			$timeline .= '<span>'.format_string( $item->text ).'</span>';	
-			$timeline .= '<small>'.timestamp_to_relative_time( $item->date ).'</small>';	
-			$timeline .= '</a><br /> ';	
+		$timelineInnerData .='			
+					    			</div>
+						      	</div>
+					    	</div>
+			      		</div>
+					</div>
+		      	<!-- <div class="modal-footer">
+					
+		      	</div> -->
+		    </div>
+		  </div>
+		</div>';
+					
+			
+	
+			
+			
+
 			
 		}
-		$timeline .= '</div>' ;	
-		return $timeline;
-	}
-	
-	function getPostId($id){
-		$ids = explode("_" , $id) ;
-		return $ids[1];
-	}
-
-	function formatUserComments($comments, $link){
-		
-		$feedData = '<a href="'.$link.'"> <div>';
-		foreach ($comments as $comment){
-			$feedData .= '<span> '.$comment['message'].'</span>';
-			//$feedData .= '<span> Count '.$comment['like_count'].'</span><br />';
-		} 
-		$feedData .= '</div> </a>';
-		return $feedData;
+		echo $timelineInnerData ;
 	}
 	
 	
 		try {
-
-			//echo CHtml::button(' POST ', array('submit' => array('fb/postPage'))); 
-			/*echo CHtml::link(' POST ',array('fb/postPage'),array('class'=>'link_on_fb'));
-			echo '<br />' ; 
-			echo '<br />' ; 
-			echo CHtml::link(' Update Status ',array('fb/updateStatusPage'),array('class'=>'link_on_fb')); 
-			echo '<br />' ; 
-			echo '<br />' ; */
 
 			
 			
@@ -133,66 +208,31 @@
 			// UserId for Facebook account
 			
 			$fbIdentifier = $fbUserProfile->identifier; 
-			$picture = $fbAdapter->api()->api($fbIdentifier.'?fields=cover');
-			
-			//echo "<br />" . $fbIdentifier  ;
-//			echo '<pre>' ;
-//			$profileImage = $fbAdapter->api()->api('/880000108713199/picture?redirect=0&height=200&width=200&type=normal');
-//			print_r($profileId);
-//			exit;
 	?>
-	<?php 
-	//	$this->breadcrumbs=array(
-	//		'Facebook',
-	//	);
-	?>
-	<div class="row feed-list">
-		<div class="cover">
-			<div class="preview">
-				<img class="img-responsive" src="<?php echo $picture['cover']['source']; ?>" />
-			</div>
-			<div class="user">
-				<span class="avatar">
-					<img class="img-circle" src="<?php echo $fbUserProfile->photoURL;?>" />
-				</span>
-				<span class="lead"><?php echo  $fbUserProfile->displayName; ?></span>
-			</div>
-			<ul class="list-inline menu">
-				<li class="active"><a href="javascript:void(0);"><i class="fa fa-users"></i> Friends (234)</a></li>
-				<li><a href="javascript:void(0);"><i class="fa fa-users"></i> Groups (5)</a></li>
-				<li><a href="javascript:void(0);"><i class="fa fa-picture-o"></i> Photos (1320)</a></li>
-				<li class="pull-right" id="settings">
-					<ul class="list-inline">
-						<li class="active" id="grid-li">
-							<a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="Grid View" id="grid-view">
-								<i class="fa fa-th-large"></i>
-							</a>
-						</li>
-						<li id="list-li">
-							<a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="List View" id="list-view">
-								<i class="fa fa-list-ul"></i>
-							</a>
-						</li>
-						<li id="refresh-li">
-							<a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="Reload" id="grid-view">
-								<i class="fa fa-refresh"></i>
-							</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-		<div class="columns" id="columns-id">
 	
-		<?php 
+	<div class="">
+		<img style="width: 32px; height: 32px;"  src = "<?php echo $fbUserProfile->photoURL;?>" />
+		<h3><?php echo  $fbUserProfile->displayName; ?></h3>
+	</div>
+	<div class="row feed-list">
+		<div class="">
+	
+	<?php 
 
 			$access_token = $fbAdapter->getAccessToken();
-			//$timelineFeeds = $fbAdapter->api()->api('/me/home');
-			$timelineFeeds = $fbAdapter->api()->api('/'.$fbIdentifier.'?fields=home.filter(others){message,id,from,picture,actions,shares,likes,comments,photos}&limit=50');
+			$homeTimelineFeeds = $fbAdapter->api()->api($fbIdentifier.'/home?limit=25');
+//			$homeTimelineFeeds = $fbAdapter->api()->api($fbIdentifier.'/feed?is_visible=true');
+			//echo "<pre>" ;
+			//print_r($homeTimelineFeeds);
+			//$timelineInnerData='';
+			formatHomeTimeLineFeeds ($homeTimelineFeeds ) ; 
+			
+			
+			/*
+			$timelineFeeds = $fbAdapter->api()->api('/'.$fbIdentifier.'?fields=home.filter(others){message,id,from,picture,actions,shares,likes,comments,photos}');
 			$timelineInnerData='';
-//			echo "<pre>" ;
-//	print_r($timelineFeeds);exit;
 			$feeds = $timelineFeeds['home']['data'];
+			
 			foreach ($feeds as $key => $feed){
 				
 				//error_log(' Key ' . $key );
@@ -305,7 +345,7 @@
 												      				<li id="'.$comment['id'].'_span"></li>
 												      			</ul>
 												      			<p>'. $comment['message'].'</p>
-												      			<div class="form-inline">
+												      			<form class="form-inline">
 												      				<div class="form-group">
 												      					<img style="width:32px;height:32px;" src="'.$personProfileImageData.'" />
 												      					<input type"text" placeholder="Write a comment here ..." class="form-control" id="'.$comment['id'].'_comment" onkeypress="handleCarriageReturns(event, \''.$comment['id'].'\')" />
@@ -313,7 +353,7 @@
 												      				<!--<div class="form-group">
 													        			<button type="button" class="btn btn-primary" onclick="postRepliesToComments(\''.$comment['id'].'\') ">Post</button>
 													        		</div>-->
-													        	</div>
+													        	</form>
 												      		</div>
 												      	</div>';
 														
@@ -335,8 +375,8 @@
 					
 				}
 			}
-		echo $timelineInnerData ;	
-			
+	//	echo $timelineInnerData ;	
+			*/
 		} catch (Exception $e){
 			echo $e->getMessage();
 		}
@@ -360,7 +400,6 @@
 	*/
 	
 	postRepliesToComments = function (id){
-		
 		var url = "index.php?r=fb/CurlPostTOProvder";
 		var message  = $("#"+id+"_comment").val();
 		var data = 'id='+ id  + '&message='+ message;

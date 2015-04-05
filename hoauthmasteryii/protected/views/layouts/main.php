@@ -46,9 +46,9 @@
 							</ul>
 						</li>
 					</ul>
-					<form class="navbar-form navbar-right" role="search">
+					<form class="navbar-form navbar-right" role="search" action="./index.php?r=search/index" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
+							<input name="searchBox" type="text" class="form-control" placeholder="Search">
 						</div>
 						<button type="submit" class="btn"><i class="fa fa-search"></i></button>
 					</form>
@@ -109,7 +109,15 @@
 
 		Adding Javascript - place them as required
 		-->
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script>
+<?php
+
+ $baseUrl = Yii::app()->baseUrl; 
+ $cs = Yii::app()->getClientScript();
+ $cs->registerScriptFile($baseUrl.'/js/jquery.min.js',CClientScript::POS_END);
+
+?>
+		
+		<!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script> -->
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/modernizr.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
 		<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/grid.js"></script>
